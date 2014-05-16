@@ -1,0 +1,17 @@
+.classpath
+.project
+.settings
+target
+local-plugins/*.jar
+*~
+assembly/*/runner
+derby.log
+C:\\nppdf32Log\\debuglog.txt
+
+
+org.abstractform.binding/META-INF
+org.abstractform.binding.eclipse/META-INF
+org.abstractform.binding.vaadin/META-INF
+org.abstractform.core/META-INF
+org.abstractform.vaadin/META-INF
+org.abstractform.test.common/META-INF
