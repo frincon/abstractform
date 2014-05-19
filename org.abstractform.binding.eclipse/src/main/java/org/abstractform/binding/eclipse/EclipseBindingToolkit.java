@@ -32,7 +32,6 @@ import org.abstractform.binding.validation.ValidationError;
 import org.abstractform.core.Component;
 import org.abstractform.core.Container;
 import org.abstractform.core.Field;
-import org.abstractform.core.FormInstance;
 import org.abstractform.core.SubForm;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.BindingProperties;
@@ -143,10 +142,11 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 				for (int col = 0; col < subForm.getColumns(); col++) {
 					Component compSubForm = subForm.getField(row, col);
 					if (compSubForm instanceof Field) {
-						Field field = (Field) compSubForm;
+						final Field field = (Field) compSubForm;
 
 						if (field instanceof BField) {
-							Binding binding = bindField(dbCtx, (BField) field, formValue, formInstance, beanClass, immediate);
+							Binding binding = bindField(dbCtx, (BField) field, formValue, formInstance, beanClass, immediate,
+									presenter);
 							bindErrorMessage(dbCtx, binding.getValidationStatus(), (BField) field, formInstance);
 
 							IObservable observableField = binding.getTarget();
@@ -162,8 +162,10 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 										SimplePropertyObservableValue value = (SimplePropertyObservableValue) event.getSource();
 										String fieldId = ((FieldValueProperty) value.getProperty()).getFieldId();
 										callPresenterFieldChanged(presenter, fieldId, formInstance);
+									} else {
+										String fieldId = field.getId();
+										callPresenterFieldChanged(presenter, fieldId, formInstance);
 									}
-									// TODO Make other types (for table for ex.)
 								}
 							});
 
@@ -261,7 +263,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	protected <S> Binding bindField(DataBindingContext dbCtx, BField field, IObservableValue master, BFormInstance<S> formInstance,
-			Class<S> beanClass, boolean immediate) {
+			Class<S> beanClass, boolean immediate, BPresenter<S> presenter) {
 		IObservableValue model = getObservableValue(master, field, beanClass);
 		IObservableValue target = AbstractFormProperties.field(field.getId()).observe(formInstance);
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE);
