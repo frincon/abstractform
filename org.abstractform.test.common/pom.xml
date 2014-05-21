@@ -25,6 +25,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<name>AbstractForm Test Common</name>
 
 	<build>
 		<plugins>

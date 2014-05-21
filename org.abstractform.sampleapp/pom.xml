@@ -24,6 +24,8 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<name>AbstractForm Sample Application</name>
+
 	<build>
 		<finalName>org.abstractform.sampleapp</finalName>
 		<plugins>

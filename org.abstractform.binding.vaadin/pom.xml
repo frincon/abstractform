@@ -24,6 +24,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<name>AbstractForm Binding Vaadin</name>
 
 	<build>
 		<plugins>

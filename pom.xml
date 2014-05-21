@@ -22,6 +22,40 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>9</version>
+	</parent>
+
+	<name>AbstractForm Parent</name>
+	<description>Abstract From Framework for Java</description>
+
+	<url>https://github.com/frincon/abstractform</url>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>frincon</id>
+			<name>Fernando Rincon Martin</name>
+			<email>frm.rincon@gmail.com</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>https://github.com/frincon/abstractform</url>
+		<connection>scm:git:https://github.com/frincon/abstractform.git</connection>
+		<developerConnection>scm:git:git@github.com:frincon/abstractform.git</developerConnection>
+	</scm>
+
+
 	<modules>
 		<module>org.abstractform.core</module>
 		<module>org.abstractform.vaadin</module>

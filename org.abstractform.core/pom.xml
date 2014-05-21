@@ -25,6 +25,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<name>AbstractForm Core</name>
 
 	<build>
 		<plugins>

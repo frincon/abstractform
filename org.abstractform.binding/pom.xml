@@ -25,6 +25,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<name>AbstractForm Binding</name>
 
 	<build>
 		<plugins>
