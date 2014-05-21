@@ -73,6 +73,27 @@
 		<vaadin.version>6.8.14</vaadin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<dependencies.directory>dependencies</dependencies.directory>
+
+		<dependencies.file1.basename>org.eclipse.core.databinding</dependencies.file1.basename>
+		<dependencies.file1.version>1.4.1.v20120521-2329</dependencies.file1.version>
+
+		<dependencies.file2.basename>org.eclipse.core.databinding.beans</dependencies.file2.basename>
+		<dependencies.file2.version>1.2.200.v20120523-1955</dependencies.file2.version>
+
+		<dependencies.file3.basename>org.eclipse.core.databinding.observable</dependencies.file3.basename>
+		<dependencies.file3.version>1.4.1.v20120521-2329</dependencies.file3.version>
+
+		<dependencies.file4.basename>org.eclipse.core.databinding.property</dependencies.file4.basename>
+		<dependencies.file4.version>1.4.100.v20120523-1955</dependencies.file4.version>
+
+		<dependencies.file5.basename>org.eclipse.equinox.common</dependencies.file5.basename>
+		<dependencies.file5.version>3.6.100.v20120522-1841</dependencies.file5.version>
+
+		<dependencies.file6.basename>org.eclipse.osgi</dependencies.file6.basename>
+		<dependencies.file6.version>3.8.0.v20120529-1548</dependencies.file6.version>
+		
 	</properties>
 
 	<build>
@@ -360,11 +381,11 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<file>dependencies/org.eclipse.core.databinding_1.4.1.v20120521-2329.jar</file>
+							<file>${dependencies.directory}/${dependencies.file1.basename}_${dependencies.file1.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.org.eclipse.core.databinding</artifactId>
-							<version>1.4.1.v20120521-2329</version>
-							<sources>dependencies/org.eclipse.core.databinding.source_1.4.1.v20120521-2329.jar</sources>
+							<artifactId>${project.groupId}.${dependencies.file1.basename}</artifactId>
+							<version>${dependencies.file1.version}</version>
+							<sources>${dependencies.directory}/${dependencies.file1.basename}.source_${dependencies.file1.version}.jar</sources>
 							<packaging>jar</packaging>
 						</configuration>
 					</execution>
@@ -375,11 +396,11 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<file>dependencies/org.eclipse.core.databinding.beans_1.2.200.v20120523-1955.jar</file>
+							<file>${dependencies.directory}/${dependencies.file2.basename}_${dependencies.file2.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.org.eclipse.core.databinding.beans</artifactId>
-							<version>1.2.200.v20120523-1955</version>
-							<sources>dependencies/org.eclipse.core.databinding.beans.source_1.2.200.v20120523-1955.jar</sources>
+							<artifactId>${project.groupId}.${dependencies.file2.basename}</artifactId>
+							<version>${dependencies.file2.version}</version>
+							<sources>${dependencies.directory}/${dependencies.file2.basename}.source_${dependencies.file2.version}.jar</sources>
 							<packaging>jar</packaging>
 						</configuration>
 					</execution>
@@ -390,11 +411,11 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<file>dependencies/org.eclipse.core.databinding.observable_1.4.1.v20120521-2329.jar</file>
+							<file>${dependencies.directory}/${dependencies.file3.basename}_${dependencies.file3.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.org.eclipse.core.databinding.observable</artifactId>
-							<version>1.4.1.v20120521-2329</version>
-							<sources>dependencies/org.eclipse.core.databinding.observable.source_1.4.1.v20120521-2329.jar</sources>
+							<artifactId>${project.groupId}.${dependencies.file3.basename}</artifactId>
+							<version>${dependencies.file3.version}</version>
+							<sources>${dependencies.directory}/${dependencies.file3.basename}.source_${dependencies.file3.version}.jar</sources>
 							<packaging>jar</packaging>
 						</configuration>
 					</execution>
@@ -405,11 +426,11 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<file>dependencies/org.eclipse.core.databinding.property_1.4.100.v20120523-1955.jar</file>
+							<file>${dependencies.directory}/${dependencies.file4.basename}_${dependencies.file4.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.org.eclipse.core.databinding.property</artifactId>
-							<version>1.4.100.v20120523-1955</version>
-							<sources>dependencies/org.eclipse.core.databinding.property.source_1.4.100.v20120523-1955.jar</sources>
+							<artifactId>${project.groupId}.${dependencies.file4.basename}</artifactId>
+							<version>${dependencies.file4.version}</version>
+							<sources>${dependencies.directory}/${dependencies.file4.basename}.source_${dependencies.file4.version}.jar</sources>
 							<packaging>jar</packaging>
 						</configuration>
 					</execution>
@@ -420,13 +441,13 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<file>dependencies/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar</file>
+							<file>${dependencies.directory}/${dependencies.file5.basename}_${dependencies.file5.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.org.eclipse.equinox.common</artifactId>
-							<version>3.6.100.v20120522-1841</version>
-							<sources>dependencies/org.eclipse.equinox.common.source_3.6.100.v20120522-1841.jar</sources>
+							<artifactId>${project.groupId}.${dependencies.file5.basename}</artifactId>
+							<version>${dependencies.file5.version}</version>
+							<sources>${dependencies.directory}/${dependencies.file5.basename}.source_${dependencies.file5.version}.jar</sources>
 							<packaging>jar</packaging>
-							<pomFile>dependencies/org.eclipse.equinox.common_3.6.100.v20120522-1841.pom</pomFile>
+							<pomFile>${dependencies.directory}/${dependencies.file5.basename}_${dependencies.file5.version}.pom</pomFile>
 						</configuration>
 					</execution>
 					<execution>
@@ -436,18 +457,17 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<file>dependencies/org.eclipse.osgi_3.8.0.v20120529-1548.jar</file>
+							<file>${dependencies.directory}/${dependencies.file6.basename}_${dependencies.file6.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.org.eclipse.osgi</artifactId>
-							<version>3.8.0.v20120529-1548</version>
-							<sources>dependencies/org.eclipse.osgi.source_3.8.0.v20120529-1548.jar</sources>
+							<artifactId>${project.groupId}.${dependencies.file6.basename}</artifactId>
+							<version>${dependencies.file6.version}</version>
+							<sources>${dependencies.directory}/${dependencies.file6.basename}.source_${dependencies.file6.version}.jar</sources>
 							<packaging>jar</packaging>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
-
 	</build>
 	<dependencyManagement>
 		<dependencies>
