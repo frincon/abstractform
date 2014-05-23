@@ -177,8 +177,7 @@ public class SampleForm extends BFForm<BusinessPartner> {
 
 	@Override
 	public BPresenter<BusinessPartner> createPresenter(BFormInstance<BusinessPartner> formInstance, BusinessPartner model) {
-		Presenter presenter = new Presenter();
-		presenter.setModel(model);
+		Presenter presenter = new Presenter(model);
 		return presenter;
 	}
 
@@ -189,8 +188,9 @@ public class SampleForm extends BFForm<BusinessPartner> {
 		public final static String PROPERTY_EMPLOYEE_READ_ONLY = "employeeReadOnly";
 		public final static String PROPERTY_AGENT_READ_ONLY = "agentReadOnly";
 
-		protected Presenter() {
-			super(Arrays.asList(PROPERTY_AGENT_READ_ONLY, PROPERTY_EMPLOYEE_READ_ONLY));
+		protected Presenter(BusinessPartner model) {
+			super(model, Arrays.asList(PROPERTY_AGENT_READ_ONLY, PROPERTY_EMPLOYEE_READ_ONLY));
+			checkEmployeeAgentReadOnly();
 		}
 
 		protected void checkEmployeeAgentReadOnly() {
@@ -226,12 +226,6 @@ public class SampleForm extends BFForm<BusinessPartner> {
 			Object old = this.agentReadOnly;
 			this.agentReadOnly = agentReadOnly;
 			firePropertyChange(PROPERTY_AGENT_READ_ONLY, old, this.agentReadOnly);
-		}
-
-		@Override
-		public void setModel(BusinessPartner model) {
-			super.setModel(model);
-			checkEmployeeAgentReadOnly();
 		}
 
 		/*
