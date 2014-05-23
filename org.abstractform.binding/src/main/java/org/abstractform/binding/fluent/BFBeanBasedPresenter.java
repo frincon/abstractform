@@ -26,7 +26,7 @@ public class BFBeanBasedPresenter<S> extends BFAbstractPresenter<S> {
 	}
 
 	@Override
-	public void fieldHasChanged(String fieldId, S model) {
+	public void fieldHasChanged(String fieldId) {
 		// Nothing to do
 	}
 

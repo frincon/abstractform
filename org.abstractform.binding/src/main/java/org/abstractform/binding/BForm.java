@@ -24,11 +24,12 @@ public interface BForm<S> extends Form {
 	/**
 	 * Create new presenter with initial value of model
 	 * 
-	 * @param model Initial value, can be null
+	 * @param model
+	 *            Initial value, can be null
 	 * @return A presenter. The return value can't be null!!
 	 */
-	public BPresenter<S> createPresenter(BFormInstance<S> formInstance, S model);
-	
+	public BPresenter createPresenter(BFormInstance<S> formInstance, S model);
+
 	public boolean isValidationSummaryVisible();
-	
+
 }

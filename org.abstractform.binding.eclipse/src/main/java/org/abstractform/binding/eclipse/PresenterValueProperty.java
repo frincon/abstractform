@@ -41,12 +41,12 @@ public class PresenterValueProperty extends SimpleValueProperty {
 
 		@Override
 		protected void doAddTo(Object source) {
-			((BPresenter<?>) source).addPropertyChangeListener(propertyName, this);
+			((BPresenter) source).addPropertyChangeListener(propertyName, this);
 		}
 
 		@Override
 		protected void doRemoveFrom(Object source) {
-			((BPresenter<?>) source).removePropertyChangeListener(propertyName, this);
+			((BPresenter) source).removePropertyChangeListener(propertyName, this);
 		}
 
 	}
@@ -62,13 +62,13 @@ public class PresenterValueProperty extends SimpleValueProperty {
 
 	@Override
 	protected Object doGetValue(Object source) {
-		BPresenter<?> presenter = (BPresenter<?>) source;
+		BPresenter presenter = (BPresenter) source;
 		return presenter.getPropertyValue(propertyName);
 	}
 
 	@Override
 	protected void doSetValue(Object source, Object value) {
-		BPresenter<?> presenter = (BPresenter<?>) source;
+		BPresenter presenter = (BPresenter) source;
 		presenter.setPropertyValue(propertyName, value);
 	}
 

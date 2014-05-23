@@ -66,7 +66,7 @@ public class BFForm<S> extends FForm implements BForm<S> {
 	}
 
 	@Override
-	public BPresenter<S> createPresenter(BFormInstance<S> formInstance, S model) {
+	public BPresenter createPresenter(BFormInstance<S> formInstance, S model) {
 		return new BFBeanBasedPresenter<S>(model);
 	}
 

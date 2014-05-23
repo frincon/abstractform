@@ -20,7 +20,7 @@ import java.beans.PropertyChangeSupport;
 
 import org.abstractform.binding.BPresenter;
 
-public abstract class BFAbstractPresenter<S> implements BPresenter<S> {
+public abstract class BFAbstractPresenter<S> implements BPresenter {
 
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -44,7 +44,6 @@ public abstract class BFAbstractPresenter<S> implements BPresenter<S> {
 		pcs.firePropertyChange(propertyName, oldValue, newValue);
 	}
 
-	@Override
 	public S getModel() {
 		return model;
 	}

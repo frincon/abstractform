@@ -29,15 +29,13 @@ import java.beans.PropertyChangeListener;
  * @param <S>
  */
 
-public interface BPresenter<S> {
+public interface BPresenter {
 
 	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener);
 
 	public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener);
 
-	public void fieldHasChanged(String fieldId, S model);
-
-	public S getModel();
+	public void fieldHasChanged(String fieldId);
 
 	public Object getPropertyValue(String propertyName);
 

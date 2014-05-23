@@ -176,7 +176,7 @@ public class SampleForm extends BFForm<BusinessPartner> {
 	}
 
 	@Override
-	public BPresenter<BusinessPartner> createPresenter(BFormInstance<BusinessPartner> formInstance, BusinessPartner model) {
+	public BPresenter createPresenter(BFormInstance<BusinessPartner> formInstance, BusinessPartner model) {
 		Presenter presenter = new Presenter(model);
 		return presenter;
 	}

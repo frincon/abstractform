@@ -151,7 +151,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	protected <S> void callPresenterFieldChanged(IObservableValue presenterValue, String fieldId, BFormInstance<S> formInstance) {
-		((BPresenter<S>) presenterValue.getValue()).fieldHasChanged(fieldId, formInstance.getValue());
+		((BPresenter) presenterValue.getValue()).fieldHasChanged(fieldId);
 	}
 
 	private Binding bindValidationSummaryError(final DataBindingContext dbCtx, final BFormInstance<?> formInstance) {
