@@ -69,11 +69,12 @@
 			<artifactId>geronimo-validation_1.0_spec</artifactId>
 			<version>1.1</version>
 		</dependency>
-		<dependency>
+<!-- <dependency>
 			<groupId>org.apache.bval</groupId>
 			<artifactId>org.apache.bval.bundle</artifactId>
 			<version>0.5</version>
 		</dependency>
+ -->
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -86,6 +87,11 @@
 			<artifactId>org.abstractform.test.common</artifactId>
 			<version>${project.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.1</version>
 		</dependency>
 
 	</dependencies>

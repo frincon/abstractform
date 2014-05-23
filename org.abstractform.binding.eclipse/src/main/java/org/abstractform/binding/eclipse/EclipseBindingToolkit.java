@@ -15,9 +15,6 @@
  */
 package org.abstractform.binding.eclipse;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +35,6 @@ import org.eclipse.core.databinding.BindingProperties;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.UpdateListStrategy;
 import org.eclipse.core.databinding.UpdateValueStrategy;
-import org.eclipse.core.databinding.beans.BeanProperties;
 import org.eclipse.core.databinding.conversion.IConverter;
 import org.eclipse.core.databinding.observable.ChangeEvent;
 import org.eclipse.core.databinding.observable.IChangeListener;
@@ -48,6 +44,8 @@ import org.eclipse.core.databinding.observable.list.IListChangeListener;
 import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.list.ListChangeEvent;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.IValueChangeListener;
+import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.internal.databinding.property.value.SimplePropertyObservableValue;
 import org.eclipse.core.runtime.IStatus;
@@ -60,7 +58,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	@Override
-	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S> form, boolean immediate) {
+	public <S> void bindFields(final BFormInstance<S> formInstance, final BForm<S> form, boolean immediate) {
 		Object context = formInstance.getBindingContext();
 		if (context != null) {
 			throw new UnsupportedOperationException("Binding context has been already set");
@@ -68,61 +66,25 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 
 		DataBindingContext dbCtx = createDataBindingContext(formInstance);
 
-		//WritableValue formValue = new WritableValue(formInstance.getValue(), form.getBeanClass());
-		WritableValue formValue = new WritableValue(formInstance.getValue(), Object.class);
+		final WritableValue formValue = new WritableValue(formInstance.getValue(), Object.class);
+		final WritableValue presenterValue = new WritableValue(form.createPresenter(formInstance, formInstance.getValue()),
+				BPresenter.class);
 
-		final BPresenter<S> presenter = form.createPresenter(formInstance, formInstance.getValue());
+		formValue.addValueChangeListener(new IValueChangeListener() {
+
+			@Override
+			public void handleValueChange(ValueChangeEvent event) {
+				presenterValue.setValue(form.createPresenter(formInstance, formInstance.getValue()));
+			}
+		});
 
 		bindFormValue(dbCtx, formValue, form, formInstance);
 
-		recursiveAddBindings(dbCtx, formValue, formInstance, form.getBeanClass(), form, presenter, immediate);
+		recursiveAddBindings(dbCtx, formValue, formInstance, form, presenterValue, immediate);
 
-		bindPresenter(dbCtx, presenter, formInstance);
-		final Binding bindingSummary = bindValidationSummaryError(dbCtx, formInstance);
+		bindValidationSummaryError(dbCtx, formInstance);
 
 		formInstance.setBindingContext(new EclipseBindingContext(dbCtx));
-	}
-
-	protected <S> void bindPresenter(DataBindingContext dbCtx, final BPresenter<S> presenter, BFormInstance<S> formInstance) {
-		final PropertyChangeListener listener = new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				presenter.modelHasChanged(evt.getPropertyName(), (S) evt.getSource());
-			}
-		};
-		if (formInstance.getValue() != null) {
-			callAddPropertyChangeMethod(formInstance.getValue(), listener);
-		}
-		formInstance.addValuePropertyChangeListener(new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				S model = (S) evt.getOldValue();
-				callRemovePropertyChangeMethod(model, listener);
-				presenter.setModel((S) evt.getNewValue());
-				model = (S) evt.getNewValue();
-				callAddPropertyChangeMethod(model, listener);
-			}
-		});
-	}
-
-	protected void callAddPropertyChangeMethod(Object value, PropertyChangeListener listener) {
-		try {
-			Method method = value.getClass().getMethod("addPropertyChangeListener", PropertyChangeListener.class);
-			method.invoke(value, listener);
-		} catch (Exception e) {
-			// TODO
-		}
-	}
-
-	protected void callRemovePropertyChangeMethod(Object value, PropertyChangeListener listener) {
-		try {
-			Method method = value.getClass().getMethod("removePropertyChangeListener", PropertyChangeListener.class);
-			method.invoke(value, listener);
-		} catch (Exception e) {
-			// TODO
-		}
 	}
 
 	private <S> void bindFormValue(DataBindingContext dbCtx, IObservableValue formValue, BForm<S> form,
@@ -135,7 +97,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	public <S> void recursiveAddBindings(DataBindingContext dbCtx, IObservableValue formValue, final BFormInstance<S> formInstance,
-			Class<S> beanClass, Component component, final BPresenter<S> presenter, boolean immediate) {
+			Component component, final IObservableValue presenterValue, boolean immediate) {
 		if (component instanceof SubForm) {
 			SubForm subForm = (SubForm) component;
 			for (int row = 0; row < subForm.getRows(); row++) {
@@ -145,8 +107,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 						final Field field = (Field) compSubForm;
 
 						if (field instanceof BField) {
-							Binding binding = bindField(dbCtx, (BField) field, formValue, formInstance, beanClass, immediate,
-									presenter);
+							Binding binding = bindField(dbCtx, (BField) field, formValue, formInstance, immediate, presenterValue);
 							bindErrorMessage(dbCtx, binding.getValidationStatus(), (BField) field, formInstance);
 
 							IObservable observableField = binding.getTarget();
@@ -161,10 +122,10 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 									if (event.getSource() instanceof SimplePropertyObservableValue) {
 										SimplePropertyObservableValue value = (SimplePropertyObservableValue) event.getSource();
 										String fieldId = ((FieldValueProperty) value.getProperty()).getFieldId();
-										callPresenterFieldChanged(presenter, fieldId, formInstance);
+										callPresenterFieldChanged(presenterValue, fieldId, formInstance);
 									} else {
 										String fieldId = field.getId();
-										callPresenterFieldChanged(presenter, fieldId, formInstance);
+										callPresenterFieldChanged(presenterValue, fieldId, formInstance);
 									}
 								}
 							});
@@ -172,25 +133,25 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 							//Bind read only property
 
 							if (((BField) field).getReadOnlyPresenterProperty() != null) {
-								bindReadOnlyProperty(dbCtx, ((BField) field), formInstance, presenter);
+								bindReadOnlyProperty(dbCtx, ((BField) field), formInstance, presenterValue);
 							}
 						}
 
 					} else {
-						recursiveAddBindings(dbCtx, formValue, formInstance, beanClass, compSubForm, presenter, immediate);
+						recursiveAddBindings(dbCtx, formValue, formInstance, compSubForm, presenterValue, immediate);
 					}
 				}
 			}
 		} else if (component instanceof Container) {
 			Container container = (Container) component;
 			for (Component child : container.getChildList()) {
-				recursiveAddBindings(dbCtx, formValue, formInstance, beanClass, child, presenter, immediate);
+				recursiveAddBindings(dbCtx, formValue, formInstance, child, presenterValue, immediate);
 			}
 		}
 	}
 
-	protected <S> void callPresenterFieldChanged(BPresenter<S> presenter, String fieldId, BFormInstance<S> formInstance) {
-		presenter.fieldHasChanged(fieldId, formInstance.getValue());
+	protected <S> void callPresenterFieldChanged(IObservableValue presenterValue, String fieldId, BFormInstance<S> formInstance) {
+		((BPresenter<S>) presenterValue.getValue()).fieldHasChanged(fieldId, formInstance.getValue());
 	}
 
 	private Binding bindValidationSummaryError(final DataBindingContext dbCtx, final BFormInstance<?> formInstance) {
@@ -252,9 +213,8 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	private <S> Binding bindReadOnlyProperty(DataBindingContext dbc, BField field, BFormInstance<S> formInstance,
-			BPresenter<S> presenter) {
-		IObservableValue model = BeanProperties.value(presenter.getClass(), field.getReadOnlyPresenterProperty())
-				.observe(presenter);
+			IObservableValue presenterValue) {
+		IObservableValue model = PresenterProperties.value(field.getReadOnlyPresenterProperty()).observeDetail(presenterValue);
 		IObservableValue target = AbstractFormProperties.readOnlyField(field.getId()).observe(formInstance);
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE);
 		UpdateValueStrategy targetToModel = new UpdateValueStrategy(UpdateValueStrategy.POLICY_NEVER);
@@ -263,8 +223,8 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	protected <S> Binding bindField(DataBindingContext dbCtx, BField field, IObservableValue master, BFormInstance<S> formInstance,
-			Class<S> beanClass, boolean immediate, BPresenter<S> presenter) {
-		IObservableValue model = getObservableValue(master, field, beanClass);
+			boolean immediate, IObservableValue presenterValue) {
+		IObservableValue model = getObservableValue(field, presenterValue);
 		IObservableValue target = AbstractFormProperties.field(field.getId()).observe(formInstance);
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE);
 		UpdateValueStrategy targetToModel = new UpdateValueStrategy(immediate ? UpdateValueStrategy.POLICY_UPDATE
@@ -276,13 +236,12 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 			targetToModel.setBeforeSetValidator(new ValidatorSTub(field.getValidator()));
 		}
 
-		Binding binding = dbCtx.bindValue(target, model, targetToModel, modelToTarget);
+		return dbCtx.bindValue(target, model, targetToModel, modelToTarget);
 
-		return binding;
 	}
 
-	protected IObservableValue getObservableValue(IObservableValue master, BField field, Class<?> beanClass) {
-		return BeanProperties.value(beanClass, field.getPropertyName()).observeDetail(master);
+	protected IObservableValue getObservableValue(BField field, IObservableValue presenterValue) {
+		return PresenterProperties.value(field.getPropertyName()).observeDetail(presenterValue);
 	}
 
 	protected void bindErrorMessage(DataBindingContext dbCtx, IObservableValue validationStatus, BField field,

@@ -15,13 +15,14 @@
  */
 package org.abstractform.binding.test;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.BPresenter;
-import org.abstractform.binding.fluent.BFAbstractPresenter;
+import org.abstractform.binding.fluent.BFBeanBasedOwnPropertiesPresenter;
 import org.abstractform.binding.fluent.BFDrawer;
 import org.abstractform.binding.fluent.BFField;
 import org.abstractform.binding.fluent.BFForm;
@@ -166,12 +167,17 @@ public class SampleForm extends BFForm<BusinessPartner> {
 
 	@Override
 	public BPresenter<BusinessPartner> createPresenter(BFormInstance<BusinessPartner> formInstance, BusinessPartner model) {
-		Presenter presenter = new Presenter();
-		presenter.setModel(model);
+		Presenter presenter = new Presenter(model);
 		return presenter;
 	}
 
-	public class Presenter extends BFAbstractPresenter<BusinessPartner> {
+	public class Presenter extends BFBeanBasedOwnPropertiesPresenter<BusinessPartner> {
+
+		public Presenter(BusinessPartner model) {
+			super(model, Arrays.asList(PROPERTY_AGENT_READ_ONLY, PROPERTY_EMPLOYEE_READ_ONLY));
+			checkEmployeeAgentReadOnly();
+		}
+
 		private boolean employeeReadOnly = false;
 		private boolean agentReadOnly = false;
 
@@ -213,23 +219,17 @@ public class SampleForm extends BFForm<BusinessPartner> {
 			firePropertyChange(PROPERTY_AGENT_READ_ONLY, old, this.agentReadOnly);
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.abstractform.binding.fluent.BFBeanBasedPresenter#setPropertyValue(java.lang.String, java.lang.Object)
+		 */
 		@Override
-		public void setModel(BusinessPartner model) {
-			super.setModel(model);
-			checkEmployeeAgentReadOnly();
-		}
-
-		@Override
-		public void fieldHasChanged(String fieldId, BusinessPartner model) {
-		}
-
-		@Override
-		public void modelHasChanged(String propertyName, BusinessPartner model) {
+		public void setPropertyValue(String propertyName, Object value) {
+			super.setPropertyValue(propertyName, value);
 			if (BusinessPartner.PROPERTY_EMPLOYEE.equals(propertyName) || BusinessPartner.PROPERTY_AGENT.equals(propertyName)) {
 				checkEmployeeAgentReadOnly();
 			}
-
 		}
-
 	}
 }

@@ -17,6 +17,18 @@ package org.abstractform.binding;
 
 import java.beans.PropertyChangeListener;
 
+/**
+ * Presenter are the objects than can read/write properties from the model and
+ * expose this to the framework.
+ * 
+ * The presenter object can also receive events when the fields are changed, or
+ * the model of form has been changed.
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ * @param <S>
+ */
+
 public interface BPresenter<S> {
 
 	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener);
@@ -24,11 +36,11 @@ public interface BPresenter<S> {
 	public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener);
 
 	public void fieldHasChanged(String fieldId, S model);
-	
-	public void modelHasChanged(String propertyName, S model);
-
-	public void setModel(S model);
 
 	public S getModel();
+
+	public Object getPropertyValue(String propertyName);
+
+	public void setPropertyValue(String propertyName, Object value);
 
 }

@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.abstractform.binding.fluent;
 
-public class BFDefaultPresenter<S> extends BFAbstractPresenter<S> {
+package org.abstractform.binding.eclipse;
 
-	@Override
-	public void fieldHasChanged(String fieldId, S model) {
-		// Nothing to do
-	}
+import org.eclipse.core.databinding.property.value.IValueProperty;
 
-	@Override
-	public void modelHasChanged(String propertyName, S model) {
-		// Nothing to do
+/**
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
+public class PresenterProperties {
+
+	public static IValueProperty value(String propertyName) {
+		return new PresenterValueProperty(propertyName);
 	}
 
 }

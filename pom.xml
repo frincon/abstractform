@@ -93,7 +93,7 @@
 
 		<dependencies.file6.basename>org.eclipse.osgi</dependencies.file6.basename>
 		<dependencies.file6.version>3.8.0.v20120529-1548</dependencies.file6.version>
-		
+
 	</properties>
 
 	<build>
@@ -266,8 +266,8 @@
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>1.7</source>
+						<target>1.7</target>
 					</configuration>
 				</plugin>
 				<plugin>

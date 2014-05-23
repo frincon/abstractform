@@ -15,13 +15,14 @@
  */
 package org.abstractform.sampleapp;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.BPresenter;
-import org.abstractform.binding.fluent.BFAbstractPresenter;
+import org.abstractform.binding.fluent.BFBeanBasedOwnPropertiesPresenter;
 import org.abstractform.binding.fluent.BFDrawer;
 import org.abstractform.binding.fluent.BFField;
 import org.abstractform.binding.fluent.BFForm;
@@ -181,12 +182,16 @@ public class SampleForm extends BFForm<BusinessPartner> {
 		return presenter;
 	}
 
-	public class Presenter extends BFAbstractPresenter<BusinessPartner> {
+	public class Presenter extends BFBeanBasedOwnPropertiesPresenter<BusinessPartner> {
 		private boolean employeeReadOnly = false;
 		private boolean agentReadOnly = false;
 
 		public final static String PROPERTY_EMPLOYEE_READ_ONLY = "employeeReadOnly";
 		public final static String PROPERTY_AGENT_READ_ONLY = "agentReadOnly";
+
+		protected Presenter() {
+			super(Arrays.asList(PROPERTY_AGENT_READ_ONLY, PROPERTY_EMPLOYEE_READ_ONLY));
+		}
 
 		protected void checkEmployeeAgentReadOnly() {
 			if (getModel() != null) {
@@ -229,16 +234,19 @@ public class SampleForm extends BFForm<BusinessPartner> {
 			checkEmployeeAgentReadOnly();
 		}
 
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see org.abstractform.binding.fluent.BFBeanBasedOwnPropertiesPresenter#setPropertyValue(java.lang.String,
+		 * java.lang.Object)
+		 */
 		@Override
-		public void fieldHasChanged(String fieldId, BusinessPartner model) {
-		}
-
-		@Override
-		public void modelHasChanged(String propertyName, BusinessPartner model) {
+		public void setPropertyValue(String propertyName, Object value) {
+			super.setPropertyValue(propertyName, value);
 			if (BusinessPartner.PROPERTY_EMPLOYEE.equals(propertyName) || BusinessPartner.PROPERTY_AGENT.equals(propertyName)) {
 				checkEmployeeAgentReadOnly();
-			} else if (BusinessPartner.PROPERTY_NAME.equals(propertyName) && model.getFiscalName() == null) {
-				model.setFiscalName(model.getName());
+			} else if (BusinessPartner.PROPERTY_NAME.equals(propertyName) && getModel().getFiscalName() == null) {
+				getModel().setFiscalName(getModel().getName());
 			}
 		}
 

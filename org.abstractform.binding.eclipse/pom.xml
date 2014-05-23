@@ -107,6 +107,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>${project.groupId}.org.eclipse.osgi</artifactId>
+			<version>3.8.0.v20120529-1548</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<scope>test</scope>

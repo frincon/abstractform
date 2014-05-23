@@ -26,6 +26,10 @@ public abstract class BFAbstractPresenter<S> implements BPresenter<S> {
 
 	private S model;
 
+	protected BFAbstractPresenter(S model) {
+		this.model = model;
+	}
+
 	@Override
 	public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
 		pcs.addPropertyChangeListener(propertyName, listener);
@@ -38,11 +42,6 @@ public abstract class BFAbstractPresenter<S> implements BPresenter<S> {
 
 	public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
 		pcs.firePropertyChange(propertyName, oldValue, newValue);
-	}
-
-	@Override
-	public void setModel(S model) {
-		this.model = model;
 	}
 
 	@Override

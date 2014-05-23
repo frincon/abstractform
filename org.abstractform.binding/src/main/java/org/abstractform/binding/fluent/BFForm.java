@@ -67,7 +67,7 @@ public class BFForm<S> extends FForm implements BForm<S> {
 
 	@Override
 	public BPresenter<S> createPresenter(BFormInstance<S> formInstance, S model) {
-		return new BFDefaultPresenter<S>();
+		return new BFBeanBasedPresenter<S>(model);
 	}
 
 	public boolean isValidationSummaryVisible() {

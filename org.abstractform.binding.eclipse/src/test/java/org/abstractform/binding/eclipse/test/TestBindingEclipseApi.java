@@ -15,9 +15,10 @@
  */
 package org.abstractform.binding.eclipse.test;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -90,9 +91,11 @@ public class TestBindingEclipseApi {
 		bindingToolkit.bindFields(mockForm, exampleForm);
 
 		// Verify if has calling addValueChangeListener in form instance
-		verify(mockForm, times(2)).addValuePropertyChangeListener(listener.capture());
-		verify(mockForm).setFieldValue(exampleForm.F_CIF.getId(), ST_CIF);
+		verify(mockForm, atLeastOnce()).addValuePropertyChangeListener(listener.capture());
 		verify(mockForm).setFieldValue(exampleForm.F_NAME.getId(), ST_NAME);
+		verify(mockForm).setFieldValue(exampleForm.F_CIF.getId(), ST_CIF);
+		verify(mockForm).setFieldValue(exampleForm.F_ORGANIZACION.getId(), null);
+		verify(mockForm).setFieldValue(exampleForm.F_SEARCH_KEY.getId(), null);
 		verify(mockForm).setFieldValue(exampleForm.F_ACTIVE.getId(), true);
 		verify(mockForm).setFieldValue(exampleForm.F_IS_CLIENT.getId(), false);
 		verify(mockForm).setFieldValue(exampleForm.F_FISCAL_NAME.getId(), null);
