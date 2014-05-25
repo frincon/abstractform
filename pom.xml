@@ -287,8 +287,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-surefire-plugin</artifactId>
 					<configuration>
-						<!-- Skips unit tests if the value of skip.unit.tests property is true -->
-						<skipTests>${skip.unit.tests}</skipTests>
 						<!-- Excludes integration tests when unit tests are run. ß -->
 						<excludes>
 							<exclude>**/IT*.java</exclude>
@@ -361,9 +359,6 @@
 							<goal>integration-test</goal>
 							<goal>verify</goal>
 						</goals>
-						<configuration>
-							<skipTests>${skip.integration.tests}</skipTests>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
