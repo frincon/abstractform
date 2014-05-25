@@ -23,6 +23,7 @@ import static org.mockito.Mockito.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import org.abstractform.binding.BBindingContext;
 import org.abstractform.binding.BBindingService;
 import org.abstractform.binding.BBindingToolkit;
 import org.abstractform.binding.BFormInstance;
@@ -138,6 +139,43 @@ public class TestBindingEclipseApi {
 		//Verify
 		assertEquals(ST_FISCAL_NAME, bean2.getFiscalName());
 
+	}
+
+	@Test
+	public void testFormValidator() {
+		SampleForm exampleForm = new SampleForm();
+		BFormInstance<BusinessPartner> mockForm = mock(BFormInstance.class);
+		BusinessPartner bean = new BusinessPartner();
+		bean.setName(ST_NAME);
+		bean.setCifCode(ST_CIF);
+		bean.setActive(true);
+		bean.setClient(false);
+
+		when(mockForm.getValue()).thenReturn(bean);
+
+		BBindingToolkit bindingToolkit = new EclipseBindingToolkit();
+		bindingToolkit.bindFields(mockForm, exampleForm);
+
+		ArgumentCaptor<BBindingContext> bindingContextCaptor = ArgumentCaptor.forClass(BBindingContext.class);
+		verify(mockForm).setBindingContext(bindingContextCaptor.capture());
+
+		BBindingContext context = bindingContextCaptor.getValue();
+
+		assertFalse(context.getErrors().contains("The value ABC must be A or B or C"));
+
+		ArgumentCaptor<PropertyChangeListener> listenerAbc = ArgumentCaptor.forClass(PropertyChangeListener.class);
+		verify(mockForm).addFieldChangeListener(eq(exampleForm.F_ABC.getId()), listenerAbc.capture());
+		when(mockForm.getFieldValue(eq(exampleForm.F_ABC.getId()))).thenReturn("D");
+		PropertyChangeEvent evt = new PropertyChangeEvent(mockForm, exampleForm.F_ABC.getId(), null, "D");
+		for (PropertyChangeListener ls : listenerAbc.getAllValues()) {
+			ls.propertyChange(evt);
+		}
+		verify(mockForm, atLeastOnce()).getFieldValue(eq(exampleForm.F_ABC.getId()));
+		//context.updateModel();
+
+		assertTrue(bean.getAbc().equals("D"));
+
+		assertTrue(context.getErrors().contains("The value ABC must be A or B or C"));
 	}
 
 	@Test

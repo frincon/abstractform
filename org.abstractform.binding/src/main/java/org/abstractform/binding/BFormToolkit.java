@@ -21,12 +21,12 @@ import org.abstractform.core.FormToolkit;
 
 public interface BFormToolkit<T extends BFormInstance> extends FormToolkit<T> {
 
-	public <S> BFormInstance<S> buildForm(BForm<S> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects,
+	public <S> BFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects,
 			boolean immediate);
 
-	public <S> BFormInstance<S> buildForm(BForm<S> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects);
+	public <S> BFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects);
 
-	public <S> BFormInstance<S> buildForm(BForm<S> form, BBindingToolkit bindingToolkit);
+	public <S> BFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit);
 
-	public <S> BFormInstance<S> buildForm(BForm<S> form);
+	public <S> BFormInstance<S> buildForm(BForm<S, ?> form);
 }

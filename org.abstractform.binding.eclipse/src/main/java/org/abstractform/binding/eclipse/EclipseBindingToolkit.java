@@ -25,7 +25,9 @@ import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.BPresenter;
 import org.abstractform.binding.eclipse.validation.ValidatorSTub;
+import org.abstractform.binding.eclipse.validation.ValidatorStatusProvider;
 import org.abstractform.binding.validation.ValidationError;
+import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.Component;
 import org.abstractform.core.Container;
 import org.abstractform.core.Field;
@@ -53,12 +55,12 @@ import org.eclipse.core.runtime.IStatus;
 public class EclipseBindingToolkit implements BBindingToolkit {
 
 	@Override
-	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S> form) {
+	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S, ?> form) {
 		bindFields(formInstance, form, true);
 	}
 
 	@Override
-	public <S> void bindFields(final BFormInstance<S> formInstance, final BForm<S> form, boolean immediate) {
+	public <S> void bindFields(final BFormInstance<S> formInstance, final BForm<S, ?> form, boolean immediate) {
 		Object context = formInstance.getBindingContext();
 		if (context != null) {
 			throw new UnsupportedOperationException("Binding context has been already set");
@@ -79,15 +81,21 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 		});
 
 		bindFormValue(dbCtx, formValue, form, formInstance);
-
+		bindFormValidation(dbCtx, formValue, form);
 		recursiveAddBindings(dbCtx, formValue, formInstance, form, presenterValue, immediate);
-
 		bindValidationSummaryError(dbCtx, formInstance);
-
 		formInstance.setBindingContext(new EclipseBindingContext(dbCtx));
 	}
 
-	private <S> void bindFormValue(DataBindingContext dbCtx, IObservableValue formValue, BForm<S> form,
+	private <S> void bindFormValidation(DataBindingContext dbCtx, IObservableValue formValue, BForm<S, ?> form) {
+		Validator<S> validator = form.getValidator();
+		if (validator != null) {
+			ValidatorStatusProvider statusProvider = new ValidatorStatusProvider(new ValidatorSTub(validator), formValue, dbCtx);
+			dbCtx.addValidationStatusProvider(statusProvider);
+		}
+	}
+
+	private <S> void bindFormValue(DataBindingContext dbCtx, IObservableValue formValue, BForm<S, ?> form,
 			BFormInstance<S> formInstance) {
 		IObservableValue target = formValue;
 		IObservableValue model = AbstractFormProperties.value(form).observe(formInstance);

@@ -28,9 +28,9 @@ import org.abstractform.test.common.beans.BusinessPartnerLocation;
 
 import com.vaadin.Application;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.Button.ClickEvent;
 
 public class SampleApplication extends Application {
 
@@ -44,7 +44,7 @@ public class SampleApplication extends Application {
 			@SuppressWarnings("rawtypes")
 			BFormToolkit<VaadinBindingFormInstance> toolkit = BFormService.getInstance().getFormToolkit(
 					VaadinBindingFormInstance.class);
-			BForm<BusinessPartner> form = new SampleForm();
+			BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
 			final BFormInstance<BusinessPartner> formInstance = toolkit.buildForm(form);
 			main.addComponent((Component) formInstance.getImplementation());
 
@@ -60,7 +60,7 @@ public class SampleApplication extends Application {
 			bean1.setCreatedBy("User 1");
 			bean1.setUpdated(new Date());
 			bean1.setUpdatedBy("User 2");
-			
+
 			BusinessPartnerLocation loc = new BusinessPartnerLocation();
 			loc.setAddress1("Adress One of Bean One");
 			loc.setZipCode("78734");

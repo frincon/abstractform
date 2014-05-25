@@ -30,7 +30,7 @@ public class AbstractFormProperties {
 		return new FieldValueProperty(fieldId);
 	}
 
-	public static <T> IValueProperty value(BForm<T> form) {
+	public static <T> IValueProperty value(BForm<?, T> form) {
 		return new FormValueProperty<T>(form.getBeanClass());
 	}
 
@@ -41,7 +41,7 @@ public class AbstractFormProperties {
 	public static IValueProperty errorComponent(String fieldId) {
 		return new ErrorComponentProperty(fieldId);
 	}
-	
+
 	public static IListProperty validationStatusSummary() {
 		return new FormValidationSummaryProperty();
 	}

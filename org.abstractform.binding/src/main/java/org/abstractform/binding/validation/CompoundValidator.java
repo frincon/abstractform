@@ -33,9 +33,9 @@ public class CompoundValidator<T> implements Validator<T> {
 	public List<String> validate(T value) {
 		Set<String> errorSet = new HashSet<String>();
 		for (Validator<T> validator : validatorList) {
-			errorSet.addAll(validator.validate(value));
+			List<String> errors = validator.validate(value);
+			errorSet.addAll(errors == null ? Collections.<String> emptyList() : errors);
 		}
 		return Collections.unmodifiableList(new ArrayList<String>(errorSet));
 	}
-
 }

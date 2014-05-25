@@ -17,8 +17,8 @@ package org.abstractform.binding;
 
 public interface BBindingToolkit {
 
-	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S> form);
+	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S, ?> form);
 
-	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S> form, boolean immediate);
+	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S, ?> form, boolean immediate);
 
 }

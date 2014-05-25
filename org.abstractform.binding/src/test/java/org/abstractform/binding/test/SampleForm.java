@@ -17,6 +17,7 @@ package org.abstractform.binding.test;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -33,6 +34,7 @@ import org.abstractform.binding.fluent.BFTabSheet;
 import org.abstractform.binding.fluent.selector.BFSelector;
 import org.abstractform.binding.fluent.table.BFTable;
 import org.abstractform.binding.validation.EMailValidator;
+import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.FormInstance;
 import org.abstractform.core.selector.AbstractSelectorProvider;
 import org.abstractform.core.selector.SelectorProvider;
@@ -40,7 +42,7 @@ import org.abstractform.core.selector.SelectorProviderFactory;
 import org.abstractform.test.common.beans.BusinessPartner;
 import org.abstractform.test.common.beans.Organization;
 
-public class SampleForm extends BFForm<BusinessPartner> {
+public class SampleForm extends BFForm<BusinessPartner, BusinessPartner> {
 
 	public static final Organization ORG1 = new Organization(1, "A0001", "Organizacion de Prueba", "Esta es la descripcion");
 	public static final Organization ORG2 = new Organization(1, "A0002", "Prueba2", "Esta es la descripcion 2");
@@ -163,6 +165,17 @@ public class SampleForm extends BFForm<BusinessPartner> {
 
 	public SampleForm() {
 		super(ID, NAME, BusinessPartner.class);
+		validator(new Validator<BusinessPartner>() {
+
+			@Override
+			public List<String> validate(BusinessPartner value) {
+				if (value != null && value.getAbc() != null && !Arrays.asList("A", "B", "C").contains(value)) {
+					return Arrays.asList("The value ABC must be A or B or C");
+				} else {
+					return null;
+				}
+			}
+		});
 	}
 
 	@Override

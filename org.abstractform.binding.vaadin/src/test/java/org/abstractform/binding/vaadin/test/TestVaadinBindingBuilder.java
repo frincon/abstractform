@@ -15,11 +15,9 @@
  */
 package org.abstractform.binding.vaadin.test;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.util.Date;
 
@@ -41,7 +39,7 @@ public class TestVaadinBindingBuilder {
 
 	@Test
 	public void testBuilder() throws Exception {
-		BForm<BusinessPartner> form = new SampleForm();
+		BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
 		VaadinBindingFormToolkit toolkit = new VaadinBindingFormToolkit();
 		BBindingToolkit bindingToolkit = mock(BBindingToolkit.class);
 		BFormInstance<BusinessPartner> instance = toolkit.buildForm(form, bindingToolkit);
@@ -69,7 +67,7 @@ public class TestVaadinBindingBuilder {
 
 	@Test
 	public void testBuilderWithServiceLoader() throws Exception {
-		BForm<BusinessPartner> form = new SampleForm();
+		BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
 		BFormToolkit<VaadinBindingFormInstance> toolkit = BFormService.getInstance()
 				.getFormToolkit(VaadinBindingFormInstance.class);
 		BBindingToolkit bindingToolkit = mock(BBindingToolkit.class);

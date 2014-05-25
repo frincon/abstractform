@@ -40,7 +40,7 @@ public class TestApplication extends Application {
 			setMainWindow(main);
 			BFormToolkit<VaadinBindingFormInstance> toolkit = BFormService.getInstance().getFormToolkit(
 					VaadinBindingFormInstance.class);
-			BForm<BusinessPartner> form = new SampleForm();
+			BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
 			final BFormInstance<BusinessPartner> formInstance = toolkit.buildForm(form);
 			main.addComponent((Component) formInstance.getImplementation());
 

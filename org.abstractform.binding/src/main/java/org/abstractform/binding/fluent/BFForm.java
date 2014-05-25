@@ -18,15 +18,19 @@ package org.abstractform.binding.fluent;
 import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.BPresenter;
+import org.abstractform.binding.validation.CompoundValidator;
+import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.fluent.FForm;
 
-public class BFForm<S> extends FForm implements BForm<S> {
+public class BFForm<S, T> extends FForm implements BForm<S, T> {
 
-	private Class<S> beanClass;
+	private Class<T> beanClass;
 
 	private boolean validationSummaryVisible = true;
 
-	public BFForm(String id, String name, Class<S> beanClass) {
+	private CompoundValidator<S> validator = new CompoundValidator<S>();
+
+	public BFForm(String id, String name, Class<T> beanClass) {
 		super(id, name);
 		this.beanClass = beanClass;
 	}
@@ -61,7 +65,7 @@ public class BFForm<S> extends FForm implements BForm<S> {
 	}
 
 	@Override
-	public Class<S> getBeanClass() {
+	public Class<T> getBeanClass() {
 		return beanClass;
 	}
 
@@ -78,8 +82,29 @@ public class BFForm<S> extends FForm implements BForm<S> {
 		this.validationSummaryVisible = validationSummaryVisible;
 	}
 
-	public BFForm<S> validationSummaryVisible(boolean validationSummaryVisible) {
+	public BFForm<S, T> validationSummaryVisible(boolean validationSummaryVisible) {
 		setValidationSummaryVisible(validationSummaryVisible);
+		return this;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.abstractform.binding.BForm#getValidator()
+	 */
+	@Override
+	public Validator<S> getValidator() {
+		return validator;
+	}
+
+	/**
+	 * Add model level validator to this form
+	 * 
+	 * @param validator
+	 * @return
+	 */
+	public BFForm<S, T> validator(Validator<S> validator) {
+		this.validator.addValidator(validator);
 		return this;
 	}
 

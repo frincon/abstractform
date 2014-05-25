@@ -15,11 +15,12 @@
  */
 package org.abstractform.binding;
 
+import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.Form;
 
-public interface BForm<S> extends Form {
+public interface BForm<S, T> extends Form {
 
-	public Class<S> getBeanClass();
+	public Class<T> getBeanClass();
 
 	/**
 	 * Create new presenter with initial value of model
@@ -31,5 +32,7 @@ public interface BForm<S> extends Form {
 	public BPresenter createPresenter(BFormInstance<S> formInstance, S model);
 
 	public boolean isValidationSummaryVisible();
+
+	public Validator<S> getValidator();
 
 }

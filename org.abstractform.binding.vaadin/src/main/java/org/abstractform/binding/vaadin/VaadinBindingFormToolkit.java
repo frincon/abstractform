@@ -39,7 +39,6 @@ import com.vaadin.data.Container;
 import com.vaadin.data.Container.ItemSetChangeEvent;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractSelect;
-import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.VerticalLayout;
@@ -107,7 +106,7 @@ public class VaadinBindingFormToolkit implements BFormToolkit<VaadinBindingFormI
 	}
 
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S> form, BBindingToolkit bindingToolkit,
+	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit,
 			Map<String, Object> extraObjects) {
 		return buildForm(form, bindingToolkit, extraObjects, true);
 	}
@@ -118,7 +117,7 @@ public class VaadinBindingFormToolkit implements BFormToolkit<VaadinBindingFormI
 	}
 
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S> form) {
+	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form) {
 		try {
 			return buildForm(form, BBindingService.getInstance().getBindingToolkit());
 		} catch (ServiceNotFoundException e) {
@@ -137,12 +136,12 @@ public class VaadinBindingFormToolkit implements BFormToolkit<VaadinBindingFormI
 	}
 
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S> form, BBindingToolkit bindingToolkit) {
+	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit) {
 		return buildForm(form, bindingToolkit, Collections.<String, Object> emptyMap());
 	}
 
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S> form, BBindingToolkit bindingToolkit,
+	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit,
 			Map<String, Object> extraObjects, boolean immediate) {
 		VaadinFormInstance delegate = delegateToolKit.buildForm(form, extraObjects);
 		ComponentContainer c = addValidationSummaryField(delegate.getImplementation(), form.isValidationSummaryVisible());
