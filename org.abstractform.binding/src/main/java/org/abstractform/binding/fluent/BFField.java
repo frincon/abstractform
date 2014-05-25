@@ -17,7 +17,6 @@ package org.abstractform.binding.fluent;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import org.abstractform.binding.BField;
@@ -48,10 +47,11 @@ public class BFField extends FField implements BField {
 		this.propertyName = propertyName;
 		try {
 			this.propertyDescriptor = new PropertyDescriptor(propertyName, beanClass);
+			fillFromProperty();
 		} catch (IntrospectionException e) {
-			throw new IllegalArgumentException("Property not found", e);
+			System.out.println("WARN: Property not found, not filled type neither validation");
 		}
-		fillFromProperty();
+
 	}
 
 	public Class<?> getBeanClass() {
