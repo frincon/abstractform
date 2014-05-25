@@ -16,6 +16,8 @@
 
 package org.abstractform.binding.eclipse.validation;
 
+import org.abstractform.binding.BFormInstance;
+import org.abstractform.core.FormInstance;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
@@ -29,12 +31,12 @@ import org.eclipse.core.runtime.IStatus;
 public class ValidatorStatusProvider extends MultiValidator {
 
 	private IValidator validator;
-	private IObservableValue model;
+	private FormInstance formInstance;
 	private DataBindingContext context;
 
-	public ValidatorStatusProvider(IValidator validator, IObservableValue model, DataBindingContext context) {
+	public ValidatorStatusProvider(IValidator validator, BFormInstance<?> formInstance, DataBindingContext context) {
 		this.validator = validator;
-		this.model = model;
+		this.formInstance = formInstance;
 		this.context = context;
 	}
 
@@ -59,7 +61,7 @@ public class ValidatorStatusProvider extends MultiValidator {
 		//				map.size();
 		//			}
 		//		}
-		return validator.validate(model.getValue());
+		return validator.validate(formInstance);
 	}
 
 	/*

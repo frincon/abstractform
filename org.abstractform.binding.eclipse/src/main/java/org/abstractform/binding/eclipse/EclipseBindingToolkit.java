@@ -81,16 +81,17 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 		});
 
 		bindFormValue(dbCtx, formValue, form, formInstance);
-		bindFormValidation(dbCtx, formValue, form);
+		bindFormValidation(dbCtx, formValue, form, formInstance);
 		recursiveAddBindings(dbCtx, formValue, formInstance, form, presenterValue, immediate);
 		bindValidationSummaryError(dbCtx, formInstance);
 		formInstance.setBindingContext(new EclipseBindingContext(dbCtx));
 	}
 
-	private <S> void bindFormValidation(DataBindingContext dbCtx, IObservableValue formValue, BForm<S, ?> form) {
-		Validator<S> validator = form.getValidator();
+	protected <S> void bindFormValidation(DataBindingContext dbCtx, IObservableValue formValue, BForm<S, ?> form,
+			BFormInstance<S> formInstance) {
+		Validator<BFormInstance<S>> validator = form.getValidator();
 		if (validator != null) {
-			ValidatorStatusProvider statusProvider = new ValidatorStatusProvider(new ValidatorSTub(validator), formValue, dbCtx);
+			ValidatorStatusProvider statusProvider = new ValidatorStatusProvider(new ValidatorSTub(validator), formInstance, dbCtx);
 			dbCtx.addValidationStatusProvider(statusProvider);
 		}
 	}

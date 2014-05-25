@@ -33,6 +33,6 @@ public interface BForm<S, T> extends Form {
 
 	public boolean isValidationSummaryVisible();
 
-	public Validator<S> getValidator();
+	public Validator<BFormInstance<S>> getValidator();
 
 }
