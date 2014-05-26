@@ -16,7 +16,7 @@
 package org.abstractform.vaadin.test;
 
 import org.abstractform.core.Form;
-import org.abstractform.core.test.SampleForm;
+import org.abstractform.core.fluent.test.SampleForm;
 import org.abstractform.vaadin.VaadinFormInstance;
 import org.abstractform.vaadin.VaadinFormToolkit;
 

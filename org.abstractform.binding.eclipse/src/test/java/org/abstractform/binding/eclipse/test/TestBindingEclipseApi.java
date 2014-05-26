@@ -23,12 +23,12 @@ import static org.mockito.Mockito.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import org.abstractform.binding.BBindingContext;
-import org.abstractform.binding.BBindingService;
-import org.abstractform.binding.BBindingToolkit;
+import org.abstractform.binding.BindingContext;
+import org.abstractform.binding.BindingService;
+import org.abstractform.binding.BindingToolkit;
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.eclipse.EclipseBindingToolkit;
-import org.abstractform.binding.test.SampleForm;
+import org.abstractform.binding.fluent.test.SampleForm;
 import org.abstractform.core.Drawer;
 import org.abstractform.core.Field;
 import org.abstractform.core.Form;
@@ -88,7 +88,7 @@ public class TestBindingEclipseApi {
 
 		ArgumentCaptor<PropertyChangeListener> listener = ArgumentCaptor.forClass(PropertyChangeListener.class);
 
-		BBindingToolkit bindingToolkit = new EclipseBindingToolkit();
+		BindingToolkit bindingToolkit = new EclipseBindingToolkit();
 		bindingToolkit.bindFields(mockForm, exampleForm);
 
 		// Verify if has calling addValueChangeListener in form instance
@@ -153,13 +153,13 @@ public class TestBindingEclipseApi {
 
 		when(mockForm.getValue()).thenReturn(bean);
 
-		BBindingToolkit bindingToolkit = new EclipseBindingToolkit();
+		BindingToolkit bindingToolkit = new EclipseBindingToolkit();
 		bindingToolkit.bindFields(mockForm, exampleForm);
 
-		ArgumentCaptor<BBindingContext> bindingContextCaptor = ArgumentCaptor.forClass(BBindingContext.class);
+		ArgumentCaptor<BindingContext> bindingContextCaptor = ArgumentCaptor.forClass(BindingContext.class);
 		verify(mockForm).setBindingContext(bindingContextCaptor.capture());
 
-		BBindingContext context = bindingContextCaptor.getValue();
+		BindingContext context = bindingContextCaptor.getValue();
 
 		assertFalse(context.getErrors().contains("The value ABC must be A or B or C"));
 
@@ -180,7 +180,7 @@ public class TestBindingEclipseApi {
 
 	@Test
 	public void testServiceLoader() throws Exception {
-		BBindingToolkit tl = BBindingService.getInstance().getBindingToolkit();
+		BindingToolkit tl = BindingService.getInstance().getBindingToolkit();
 		assertThat(tl, instanceOf(EclipseBindingToolkit.class));
 	}
 }

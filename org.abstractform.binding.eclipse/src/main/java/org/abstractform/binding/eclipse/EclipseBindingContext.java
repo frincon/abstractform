@@ -18,12 +18,12 @@ package org.abstractform.binding.eclipse;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.abstractform.binding.BBindingContext;
+import org.abstractform.binding.BindingContext;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.ValidationStatusProvider;
 import org.eclipse.core.runtime.IStatus;
 
-public class EclipseBindingContext implements BBindingContext {
+public class EclipseBindingContext implements BindingContext {
 
 	private DataBindingContext ctx;
 

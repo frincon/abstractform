@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.abstractform.binding.BBindingToolkit;
+import org.abstractform.binding.BindingToolkit;
 import org.abstractform.binding.BField;
 import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormInstance;
@@ -52,7 +52,7 @@ import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.internal.databinding.property.value.SimplePropertyObservableValue;
 import org.eclipse.core.runtime.IStatus;
 
-public class EclipseBindingToolkit implements BBindingToolkit {
+public class EclipseBindingToolkit implements BindingToolkit {
 
 	@Override
 	public <S> void bindFields(BFormInstance<S, ?> formInstance, BForm<S, ?> form) {

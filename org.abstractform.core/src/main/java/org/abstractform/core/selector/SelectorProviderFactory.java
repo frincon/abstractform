@@ -17,6 +17,11 @@ package org.abstractform.core.selector;
 
 import org.abstractform.core.FormInstance;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface SelectorProviderFactory {
 
 	public SelectorProvider<?> createSelectorProvider(FormInstance formInstance);

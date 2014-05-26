@@ -43,6 +43,11 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>org.abstractform.core.fluent</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>org.abstractform.vaadin</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -54,6 +59,11 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>org.abstractform.binding</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.abstractform.binding.fluent</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>

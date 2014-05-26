@@ -21,12 +21,12 @@ import static org.mockito.Mockito.*;
 
 import java.util.Date;
 
-import org.abstractform.binding.BBindingToolkit;
+import org.abstractform.binding.BindingToolkit;
 import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.BFormService;
 import org.abstractform.binding.BFormToolkit;
-import org.abstractform.binding.test.SampleForm;
+import org.abstractform.binding.fluent.test.SampleForm;
 import org.abstractform.binding.vaadin.VaadinBindingFormInstance;
 import org.abstractform.binding.vaadin.VaadinBindingFormToolkit;
 import org.abstractform.test.common.beans.BusinessPartner;
@@ -41,7 +41,7 @@ public class TestVaadinBindingBuilder {
 	public void testBuilder() throws Exception {
 		BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
 		VaadinBindingFormToolkit toolkit = new VaadinBindingFormToolkit();
-		BBindingToolkit bindingToolkit = mock(BBindingToolkit.class);
+		BindingToolkit bindingToolkit = mock(BindingToolkit.class);
 		BFormInstance<BusinessPartner, ?> instance = toolkit.buildForm(form, bindingToolkit);
 		assertNotNull(instance);
 		Component component = (Component) instance.getImplementation();
@@ -70,7 +70,7 @@ public class TestVaadinBindingBuilder {
 		BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
 		BFormToolkit<Component, VaadinBindingFormInstance<?>> toolkit = BFormService.getInstance().getFormToolkit(
 				VaadinBindingFormInstance.class);
-		BBindingToolkit bindingToolkit = mock(BBindingToolkit.class);
+		BindingToolkit bindingToolkit = mock(BindingToolkit.class);
 		BFormInstance<BusinessPartner, ?> instance = toolkit.buildForm(form, bindingToolkit);
 		assertNotNull(instance);
 		Component component = (Component) instance.getImplementation();

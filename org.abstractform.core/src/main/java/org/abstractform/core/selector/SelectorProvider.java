@@ -18,7 +18,12 @@ package org.abstractform.core.selector;
 import java.util.SortedSet;
 
 // TODO Make lazy, more efficient, etc
-
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ * @param <T>
+ */
 public interface SelectorProvider<T> {
 
 	public SortedSet<T> getElements();
@@ -28,5 +33,5 @@ public interface SelectorProvider<T> {
 	public void addSelectorProviderListener(SelectorProviderListener listener);
 
 	public void removeSelectorProviderListener(SelectorProviderListener listener);
-	
+
 }

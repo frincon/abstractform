@@ -32,7 +32,7 @@ import org.abstractform.core.Tab;
 import org.abstractform.core.TabSheet;
 import org.abstractform.core.selector.SelectorConstants;
 import org.abstractform.core.selector.SelectorProviderFactory;
-import org.abstractform.core.table.IFTable;
+import org.abstractform.core.table.TableConstants;
 import org.abstractform.vaadin.internal.VaadinFormInstanceImpl;
 
 import com.vaadin.data.Container;
@@ -223,7 +223,7 @@ public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component, V
 	}
 
 	protected VaadinFieldValueAccessor getValueAccessor(Field field, AbstractComponent component) {
-		if (field.getType().equals(IFTable.TYPE_TABLE)) {
+		if (field.getType().equals(TableConstants.TYPE_TABLE)) {
 			return new TableFieldValueAccessor();
 		} else if (field.getType().equals(Field.TYPE_NUMERIC)) {
 			return new NumericPropertyFieldValueAccessor((Class<? extends Number>) field.getExtra(Field.EXTRA_NUMBER_CLASS));
@@ -279,7 +279,7 @@ public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component, V
 			comboBox.setItemCaptionPropertyId(VaadinSelectorContainer.PROPERTY_CAPTION);
 			comboBox.setWidth("100%");
 			ret = comboBox;
-		} else if (field.getType().equals(IFTable.TYPE_TABLE)) {
+		} else if (field.getType().equals(TableConstants.TYPE_TABLE)) {
 			ret = buildTableField(field, extraObjects);
 		}
 		return ret;
@@ -293,14 +293,14 @@ public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component, V
 	protected AbstractComponent buildTableField(Field field, Map<String, Object> extraObjects) {
 		Table table = new Table();
 		table.setRowHeaderMode(Table.ROW_HEADER_MODE_INDEX);
-		List<Field> fieldList = (List<Field>) field.getExtra(IFTable.EXTRA_TABLE_FIELD_LIST);
+		List<Field> fieldList = (List<Field>) field.getExtra(TableConstants.EXTRA_TABLE_FIELD_LIST);
 		for (Field tableField : fieldList) {
 			table.addContainerProperty(tableField.getId(), String.class, "", tableField.getName(), null, Table.ALIGN_LEFT);
 		}
 		table.setSizeFull();
 		table.setSelectable(!field.isReadOnly());
 		table.setMultiSelect(!field.isReadOnly());
-		table.setPageLength((Integer) field.getExtra(IFTable.EXTRA_TABLE_PAGE_LENGHT));
+		table.setPageLength((Integer) field.getExtra(TableConstants.EXTRA_TABLE_PAGE_LENGHT));
 		return table;
 
 	}

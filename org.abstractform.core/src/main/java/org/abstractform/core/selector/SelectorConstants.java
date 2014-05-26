@@ -15,6 +15,11 @@
  */
 package org.abstractform.core.selector;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface SelectorConstants {
 
 	public static final String TYPE_SELECTOR = "core.selector";

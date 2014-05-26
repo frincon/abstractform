@@ -9,7 +9,7 @@
 	</parent>
 
 	<artifactId>site</artifactId>
-	<name>AbstractForm</name>
+	<name>AbstractForm Site</name>
 	<url>http://abstractform.org/</url>
 	<inceptionYear>2014</inceptionYear>
 
@@ -28,6 +28,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
+				<version>3.3</version>
 			</plugin>
 		</plugins>
 	</build>

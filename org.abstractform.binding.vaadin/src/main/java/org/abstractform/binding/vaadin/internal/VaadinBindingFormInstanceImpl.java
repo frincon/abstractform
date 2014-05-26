@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.abstractform.binding.BBindingContext;
+import org.abstractform.binding.BindingContext;
 import org.abstractform.binding.vaadin.VaadinBindingFormInstance;
 import org.abstractform.binding.validation.ValidationError;
 import org.abstractform.vaadin.VaadinDataObject;
@@ -48,7 +48,7 @@ public class VaadinBindingFormInstanceImpl<S> implements VaadinBindingFormInstan
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	private S value;
 	private VaadinFormInstance delegate;
-	private BBindingContext context;
+	private BindingContext context;
 
 	private ComponentContainer mainComponent;
 	private ComponentContainer validationSummaryComponent;
@@ -97,12 +97,12 @@ public class VaadinBindingFormInstanceImpl<S> implements VaadinBindingFormInstan
 	}
 
 	@Override
-	public void setBindingContext(BBindingContext context) {
+	public void setBindingContext(BindingContext context) {
 		this.context = context;
 	}
 
 	@Override
-	public BBindingContext getBindingContext() {
+	public BindingContext getBindingContext() {
 		return context;
 	}
 

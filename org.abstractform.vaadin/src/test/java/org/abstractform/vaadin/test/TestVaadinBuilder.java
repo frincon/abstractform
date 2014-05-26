@@ -23,7 +23,7 @@ import javax.management.ServiceNotFoundException;
 import org.abstractform.core.Form;
 import org.abstractform.core.FormService;
 import org.abstractform.core.FormToolkit;
-import org.abstractform.core.test.SampleForm;
+import org.abstractform.core.fluent.test.SampleForm;
 import org.abstractform.vaadin.VaadinFormInstance;
 import org.abstractform.vaadin.VaadinFormToolkit;
 import org.junit.Test;

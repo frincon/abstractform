@@ -36,7 +36,7 @@ import org.abstractform.binding.fluent.table.BFTableField;
 import org.abstractform.binding.validation.EMailValidator;
 import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.FormInstance;
-import org.abstractform.core.selector.AbstractSelectorProvider;
+import org.abstractform.core.fluent.selector.AbstractSelectorProvider;
 import org.abstractform.core.selector.SelectorConstants;
 import org.abstractform.core.selector.SelectorProvider;
 import org.abstractform.core.selector.SelectorProviderFactory;

@@ -19,7 +19,7 @@ import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.BFormService;
 import org.abstractform.binding.BFormToolkit;
-import org.abstractform.binding.test.SampleForm;
+import org.abstractform.binding.fluent.test.SampleForm;
 import org.abstractform.binding.vaadin.VaadinBindingFormInstance;
 import org.abstractform.test.common.beans.BusinessPartner;
 

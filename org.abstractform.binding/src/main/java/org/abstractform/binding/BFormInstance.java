@@ -23,9 +23,9 @@ import org.abstractform.core.FormInstance;
 
 public interface BFormInstance<S, T> extends FormInstance<T> {
 
-	public void setBindingContext(BBindingContext context);
+	public void setBindingContext(BindingContext context);
 
-	public BBindingContext getBindingContext();
+	public BindingContext getBindingContext();
 
 	public void setValue(S value);
 

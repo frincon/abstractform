@@ -15,3 +15,5 @@ org.abstractform.binding.vaadin/META-INF
 org.abstractform.core/META-INF
 org.abstractform.vaadin/META-INF
 org.abstractform.test.common/META-INF
+org.abstractform.binding.fluent/META-INF/
+org.abstractform.core.fluent/META-INF/
