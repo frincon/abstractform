@@ -16,13 +16,34 @@
 package org.abstractform.core;
 
 import java.beans.PropertyChangeListener;
-import java.io.Serializable;
 import java.util.List;
 
-public interface FormInstance {
+/**
+ * A form instance represents a form rendered in a especific implementation
+ * 
+ * This is the result of the render the form and object of this class allow access to values of fields.
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
+public interface FormInstance<S> {
 
-	public Serializable getImplementation();
+	/**
+	 * Return specific implementation of this form instance
+	 * 
+	 * This method usually returns the object need to interact with the render api.
+	 * 
+	 * @return Specific implementation of this form instance
+	 */
+	public S getImplementation();
 
+	/**
+	 * Return the value of the given field id
+	 * 
+	 * @param fieldId
+	 *            The field id that wants to return the value
+	 * @return The value of the field whith the given fieldId
+	 */
 	public Object getFieldValue(String fieldId);
 
 	/**

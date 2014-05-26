@@ -20,7 +20,7 @@ import org.abstractform.core.FormInstance;
 import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.Component;
 
-public interface VaadinFormInstance extends FormInstance {
+public interface VaadinFormInstance extends FormInstance<Component> {
 
 	@Override
 	public Component getImplementation();

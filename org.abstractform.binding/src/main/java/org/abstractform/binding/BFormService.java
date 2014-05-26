@@ -39,7 +39,7 @@ public class BFormService {
 	}
 
 	@SuppressWarnings({ "unchecked" })
-	public <T extends BFormInstance<?>> BFormToolkit<T> getFormToolkit(Class<T> formInstanceRequired)
+	public <S, T extends BFormInstance<?, S>> BFormToolkit<S, T> getFormToolkit(Class<T> formInstanceRequired)
 			throws ServiceNotFoundException {
 		Iterator<BFormToolkit> it = loader.iterator();
 		BFormToolkit toolkit = null;

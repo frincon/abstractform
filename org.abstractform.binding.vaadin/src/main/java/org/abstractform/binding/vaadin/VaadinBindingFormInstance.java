@@ -18,7 +18,8 @@ package org.abstractform.binding.vaadin;
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.vaadin.VaadinFormInstance;
 
+import com.vaadin.ui.Component;
 
-public interface VaadinBindingFormInstance<S> extends VaadinFormInstance, BFormInstance<S> {
+public interface VaadinBindingFormInstance<S> extends VaadinFormInstance, BFormInstance<S, Component> {
 
 }

@@ -20,6 +20,12 @@ import java.util.ServiceLoader;
 
 import javax.management.ServiceNotFoundException;
 
+/**
+ * Utility class to get FormToolkit from Service Loader
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 @SuppressWarnings("rawtypes")
 public class FormService {
 
@@ -31,6 +37,11 @@ public class FormService {
 		loader = ServiceLoader.load(FormToolkit.class);
 	}
 
+	/**
+	 * Return a singleton instance
+	 * 
+	 * @return The singleton instance
+	 */
 	public static synchronized FormService getInstance() {
 		if (instance == null) {
 			instance = new FormService();
@@ -38,8 +49,18 @@ public class FormService {
 		return instance;
 	}
 
+	/**
+	 * Find in the Service Loader a {@link FormToolkit} that returns the required form instance type of rendered forms
+	 * 
+	 * @param formInstanceRequired
+	 *            The specific FormInstance class that the form toolkit must return when render form
+	 * @return The FormToolkit that build form instances of the given form instance class
+	 * @throws ServiceNotFoundException
+	 *             When a FormToolkit is not found
+	 */
 	@SuppressWarnings("unchecked")
-	public <T extends FormInstance> FormToolkit<T> getFormToolkit(Class<T> formInstanceRequired) throws ServiceNotFoundException {
+	public <S, T extends FormInstance<S>> FormToolkit<S, T> getFormToolkit(Class<T> formInstanceRequired)
+			throws ServiceNotFoundException {
 		Iterator<FormToolkit> it = loader.iterator();
 		FormToolkit toolkit = null;
 		while (toolkit == null && it.hasNext()) {

@@ -22,6 +22,11 @@ import java.util.List;
 import org.abstractform.core.Component;
 import org.abstractform.core.Container;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public abstract class FAbstractContainer extends FAbstractComponent implements Container {
 
 	public FAbstractContainer(String id) {

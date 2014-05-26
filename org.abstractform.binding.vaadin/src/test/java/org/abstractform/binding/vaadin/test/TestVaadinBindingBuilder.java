@@ -42,7 +42,7 @@ public class TestVaadinBindingBuilder {
 		BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
 		VaadinBindingFormToolkit toolkit = new VaadinBindingFormToolkit();
 		BBindingToolkit bindingToolkit = mock(BBindingToolkit.class);
-		BFormInstance<BusinessPartner> instance = toolkit.buildForm(form, bindingToolkit);
+		BFormInstance<BusinessPartner, ?> instance = toolkit.buildForm(form, bindingToolkit);
 		assertNotNull(instance);
 		Component component = (Component) instance.getImplementation();
 		assertThat(component, instanceOf(VerticalLayout.class));
@@ -68,10 +68,10 @@ public class TestVaadinBindingBuilder {
 	@Test
 	public void testBuilderWithServiceLoader() throws Exception {
 		BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
-		BFormToolkit<VaadinBindingFormInstance> toolkit = BFormService.getInstance()
-				.getFormToolkit(VaadinBindingFormInstance.class);
+		BFormToolkit<Component, VaadinBindingFormInstance<?>> toolkit = BFormService.getInstance().getFormToolkit(
+				VaadinBindingFormInstance.class);
 		BBindingToolkit bindingToolkit = mock(BBindingToolkit.class);
-		BFormInstance<BusinessPartner> instance = toolkit.buildForm(form, bindingToolkit);
+		BFormInstance<BusinessPartner, ?> instance = toolkit.buildForm(form, bindingToolkit);
 		assertNotNull(instance);
 		Component component = (Component) instance.getImplementation();
 		assertThat(component, instanceOf(VerticalLayout.class));

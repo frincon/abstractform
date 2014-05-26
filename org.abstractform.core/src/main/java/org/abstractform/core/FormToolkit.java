@@ -18,19 +18,41 @@ package org.abstractform.core;
 import java.util.Map;
 
 /**
- * Interface that implement all Form Builders to build specifit form for a
- * implementation
+ * Interface that must be implement the specific form builder for specific form instance type
  * 
  * @author Fernando Rincon <frm.rincon@gmail.com>
  * 
  * @param <T>
+ *            The form instance that this form builds
  */
-public interface FormToolkit<T extends FormInstance> {
+public interface FormToolkit<S, T extends FormInstance<S>> {
 
+	/**
+	 * Build given form
+	 * 
+	 * @param form
+	 *            The form definition that must be build
+	 * @return The form instance built
+	 */
 	public T buildForm(Form form);
-	
+
+	/**
+	 * Build given form, pass extra objects to the builder
+	 * 
+	 * @param form
+	 *            The form definition that must be build
+	 * @param extraObjects
+	 *            A custom map of objects.
+	 *            The keys allowed in this custom map is defined in the specific builder
+	 * @return The form instance built
+	 */
 	public T buildForm(Form form, Map<String, Object> extraObjects);
 
+	/**
+	 * Return the class that this FormToolkit return as a form instance
+	 * 
+	 * @return The class that this FormToolkit return as a form instance
+	 */
 	public Class<T> getFormInstanceClass();
 
 }

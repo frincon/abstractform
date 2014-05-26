@@ -42,12 +42,12 @@ public class FormValueProperty<T> extends SimpleValueProperty {
 
 		@Override
 		protected void doAddTo(Object source) {
-			((BFormInstance<?>) source).addValuePropertyChangeListener(this);
+			((BFormInstance<?, ?>) source).addValuePropertyChangeListener(this);
 		}
 
 		@Override
 		protected void doRemoveFrom(Object source) {
-			((BFormInstance<?>) source).removeValuePropertyChangeListener(this);
+			((BFormInstance<?, ?>) source).removeValuePropertyChangeListener(this);
 		}
 
 	}
@@ -64,13 +64,13 @@ public class FormValueProperty<T> extends SimpleValueProperty {
 
 	@Override
 	protected Object doGetValue(Object source) {
-		BFormInstance<T> formInstance = (BFormInstance<T>) source;
+		BFormInstance<T, ?> formInstance = (BFormInstance<T, ?>) source;
 		return formInstance.getValue();
 	}
 
 	@Override
 	protected void doSetValue(Object source, Object value) {
-		BFormInstance<T> formInstance = (BFormInstance<T>) source;
+		BFormInstance<T, ?> formInstance = (BFormInstance<T, ?>) source;
 		formInstance.setValue((T) value);
 	}
 

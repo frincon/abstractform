@@ -34,7 +34,7 @@ public class ValidatorStatusProvider extends MultiValidator {
 	private FormInstance formInstance;
 	private DataBindingContext context;
 
-	public ValidatorStatusProvider(IValidator validator, BFormInstance<?> formInstance, DataBindingContext context) {
+	public ValidatorStatusProvider(IValidator validator, BFormInstance<?, ?> formInstance, DataBindingContext context) {
 		this.validator = validator;
 		this.formInstance = formInstance;
 		this.context = context;

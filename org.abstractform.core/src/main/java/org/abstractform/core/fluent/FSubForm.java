@@ -21,6 +21,11 @@ import java.util.Map;
 import org.abstractform.core.Field;
 import org.abstractform.core.SubForm;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public class FSubForm extends FAbstractComponent implements SubForm {
 
 	private int columns;

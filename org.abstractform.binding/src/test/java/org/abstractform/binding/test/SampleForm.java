@@ -165,10 +165,10 @@ public class SampleForm extends BFForm<BusinessPartner, BusinessPartner> {
 
 	public SampleForm() {
 		super(ID, NAME, BusinessPartner.class);
-		validator(new Validator<BFormInstance<BusinessPartner>>() {
+		validator(new Validator<BFormInstance<BusinessPartner, ?>>() {
 
 			@Override
-			public List<String> validate(BFormInstance<BusinessPartner> value) {
+			public List<String> validate(BFormInstance<BusinessPartner, ?> value) {
 				value.updateModel();
 				BusinessPartner bp = value.getValue();
 				if (bp != null && bp.getAbc() != null && !Arrays.asList("A", "B", "C").contains(bp.getAbc())) {
@@ -181,7 +181,7 @@ public class SampleForm extends BFForm<BusinessPartner, BusinessPartner> {
 	}
 
 	@Override
-	public BPresenter createPresenter(BFormInstance<BusinessPartner> formInstance, BusinessPartner model) {
+	public BPresenter createPresenter(BFormInstance<BusinessPartner, ?> formInstance, BusinessPartner model) {
 		Presenter presenter = new Presenter(model);
 		return presenter;
 	}

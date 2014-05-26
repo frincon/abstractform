@@ -55,12 +55,12 @@ import org.eclipse.core.runtime.IStatus;
 public class EclipseBindingToolkit implements BBindingToolkit {
 
 	@Override
-	public <S> void bindFields(BFormInstance<S> formInstance, BForm<S, ?> form) {
+	public <S> void bindFields(BFormInstance<S, ?> formInstance, BForm<S, ?> form) {
 		bindFields(formInstance, form, true);
 	}
 
 	@Override
-	public <S> void bindFields(final BFormInstance<S> formInstance, final BForm<S, ?> form, boolean immediate) {
+	public <S> void bindFields(final BFormInstance<S, ?> formInstance, final BForm<S, ?> form, boolean immediate) {
 		Object context = formInstance.getBindingContext();
 		if (context != null) {
 			throw new UnsupportedOperationException("Binding context has been already set");
@@ -88,8 +88,8 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	protected <S> void bindFormValidation(DataBindingContext dbCtx, IObservableValue formValue, BForm<S, ?> form,
-			BFormInstance<S> formInstance) {
-		Validator<BFormInstance<S>> validator = form.getValidator();
+			BFormInstance<S, ?> formInstance) {
+		Validator<BFormInstance<S, ?>> validator = form.getValidator();
 		if (validator != null) {
 			ValidatorStatusProvider statusProvider = new ValidatorStatusProvider(new ValidatorSTub(validator), formInstance, dbCtx);
 			dbCtx.addValidationStatusProvider(statusProvider);
@@ -97,7 +97,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	private <S> void bindFormValue(DataBindingContext dbCtx, IObservableValue formValue, BForm<S, ?> form,
-			BFormInstance<S> formInstance) {
+			BFormInstance<S, ?> formInstance) {
 		IObservableValue target = formValue;
 		IObservableValue model = AbstractFormProperties.value(form).observe(formInstance);
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE);
@@ -105,8 +105,8 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 		dbCtx.bindValue(target, model, targetToModel, modelToTarget);
 	}
 
-	public <S> void recursiveAddBindings(DataBindingContext dbCtx, IObservableValue formValue, final BFormInstance<S> formInstance,
-			Component component, final IObservableValue presenterValue, boolean immediate) {
+	public <S> void recursiveAddBindings(DataBindingContext dbCtx, IObservableValue formValue,
+			final BFormInstance<S, ?> formInstance, Component component, final IObservableValue presenterValue, boolean immediate) {
 		if (component instanceof SubForm) {
 			SubForm subForm = (SubForm) component;
 			for (int row = 0; row < subForm.getRows(); row++) {
@@ -159,11 +159,11 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 		}
 	}
 
-	protected <S> void callPresenterFieldChanged(IObservableValue presenterValue, String fieldId, BFormInstance<S> formInstance) {
+	protected <S> void callPresenterFieldChanged(IObservableValue presenterValue, String fieldId, BFormInstance<S, ?> formInstance) {
 		((BPresenter) presenterValue.getValue()).fieldHasChanged(fieldId);
 	}
 
-	private Binding bindValidationSummaryError(final DataBindingContext dbCtx, final BFormInstance<?> formInstance) {
+	private Binding bindValidationSummaryError(final DataBindingContext dbCtx, final BFormInstance<?, ?> formInstance) {
 		IObservableList target = BindingProperties.validationStatus().observeDetail(dbCtx.getValidationStatusProviders());
 		IObservableList model = AbstractFormProperties.validationStatusSummary().observe(formInstance);
 		UpdateListStrategy targetToModel = new UpdateListStrategy(false, UpdateListStrategy.POLICY_ON_REQUEST);
@@ -221,7 +221,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 
 	}
 
-	private <S> Binding bindReadOnlyProperty(DataBindingContext dbc, BField field, BFormInstance<S> formInstance,
+	private <S> Binding bindReadOnlyProperty(DataBindingContext dbc, BField field, BFormInstance<S, ?> formInstance,
 			IObservableValue presenterValue) {
 		IObservableValue model = PresenterProperties.value(field.getReadOnlyPresenterProperty()).observeDetail(presenterValue);
 		IObservableValue target = AbstractFormProperties.readOnlyField(field.getId()).observe(formInstance);
@@ -231,8 +231,8 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 
 	}
 
-	protected <S> Binding bindField(DataBindingContext dbCtx, BField field, IObservableValue master, BFormInstance<S> formInstance,
-			boolean immediate, IObservableValue presenterValue) {
+	protected <S> Binding bindField(DataBindingContext dbCtx, BField field, IObservableValue master,
+			BFormInstance<S, ?> formInstance, boolean immediate, IObservableValue presenterValue) {
 		IObservableValue model = getObservableValue(field, presenterValue);
 		IObservableValue target = AbstractFormProperties.field(field.getId()).observe(formInstance);
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE);
@@ -254,7 +254,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 	}
 
 	protected void bindErrorMessage(DataBindingContext dbCtx, IObservableValue validationStatus, BField field,
-			BFormInstance<?> formInstance) {
+			BFormInstance<?, ?> formInstance) {
 		IObservableValue model = validationStatus;
 		IObservableValue target = AbstractFormProperties.errorComponent(field.getId()).observe(formInstance);
 		UpdateValueStrategy modelToTarget = new UpdateValueStrategy(UpdateValueStrategy.POLICY_UPDATE);
@@ -302,7 +302,7 @@ public class EclipseBindingToolkit implements BBindingToolkit {
 		dbCtx.bindValue(target, model, targetToModel, modelToTarget);
 	}
 
-	private DataBindingContext createDataBindingContext(BFormInstance<?> formInstance) {
+	private DataBindingContext createDataBindingContext(BFormInstance<?, ?> formInstance) {
 		Realm realm = new DefaultRealm();
 		return new DataBindingContext(realm);
 	}

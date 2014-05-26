@@ -16,8 +16,7 @@
 package org.abstractform.core;
 
 /**
- * Then field represents a control than can be bind to a property of model and
- * the user can be change using the gui
+ * Then field represents a control than the user can change and has a value
  * 
  * @author Fernando Rincon <frm.rincon@gmail.com>
  * 
@@ -30,6 +29,9 @@ public interface Field extends Component {
 	public static final String TYPE_DATETIME = "dateTime";
 	public static final String TYPE_NUMERIC = "numeric";
 
+	/**
+	 * This extra value is used for the fields with type {@link #TYPE_NUMERIC} and indicate the class that represents the number
+	 */
 	public static final String EXTRA_NUMBER_CLASS = "EXTRA_NUMBER_CLASS";
 
 	/**
@@ -103,8 +105,8 @@ public interface Field extends Component {
 	/**
 	 * Return an extra object specified by the parameter name.
 	 * 
-	 * Extra objects can hold any type of object whith any name. Use for another
-	 * type of fields than need aditional information.
+	 * Extra objects can hold any type of object with any name. Use for another
+	 * type of fields than need additional information.
 	 * 
 	 * @param key
 	 *            The key of the extra object

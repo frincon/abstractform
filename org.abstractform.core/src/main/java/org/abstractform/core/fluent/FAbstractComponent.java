@@ -18,6 +18,11 @@ package org.abstractform.core.fluent;
 import org.abstractform.core.Component;
 import org.abstractform.core.internal.IdGenerator;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public class FAbstractComponent implements Component {
 
 	private String id;

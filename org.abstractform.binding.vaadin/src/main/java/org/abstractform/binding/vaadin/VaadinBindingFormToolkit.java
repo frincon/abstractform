@@ -44,15 +44,15 @@ import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("rawtypes")
-public class VaadinBindingFormToolkit implements BFormToolkit<VaadinBindingFormInstance> {
+public class VaadinBindingFormToolkit implements BFormToolkit<Component, VaadinBindingFormInstance<?>> {
 
-	private FormToolkit<VaadinFormInstance> delegateToolKit;
+	private FormToolkit<Component, VaadinFormInstance> delegateToolKit;
 
 	public VaadinBindingFormToolkit() throws ServiceNotFoundException {
 		delegateToolKit = FormService.getInstance().getFormToolkit(VaadinFormInstance.class);
 	}
 
-	public VaadinBindingFormToolkit(FormToolkit<VaadinFormInstance> delegateToolKit) {
+	public VaadinBindingFormToolkit(FormToolkit<Component, VaadinFormInstance> delegateToolKit) {
 		this.delegateToolKit = delegateToolKit;
 	}
 
@@ -111,13 +111,22 @@ public class VaadinBindingFormToolkit implements BFormToolkit<VaadinBindingFormI
 		return buildForm(form, bindingToolkit, extraObjects, true);
 	}
 
+	/**
+	 * @see org.abstractform.core.FormToolkit#getFormInstanceClass()
+	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public Class<VaadinBindingFormInstance> getFormInstanceClass() {
-		return VaadinBindingFormInstance.class;
+	public Class<VaadinBindingFormInstance<?>> getFormInstanceClass() {
+		return (Class<VaadinBindingFormInstance<?>>) (Class<?>) VaadinBindingFormInstance.class;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.abstractform.binding.BFormToolkit#buildForm(org.abstractform.binding.BForm)
+	 */
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form) {
+	public <U> VaadinBindingFormInstance<U> buildForm(BForm<U, ?> form) {
 		try {
 			return buildForm(form, BBindingService.getInstance().getBindingToolkit());
 		} catch (ServiceNotFoundException e) {

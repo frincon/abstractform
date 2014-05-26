@@ -21,7 +21,7 @@ import java.util.List;
 import org.abstractform.binding.validation.ValidationError;
 import org.abstractform.core.FormInstance;
 
-public interface BFormInstance<S> extends FormInstance {
+public interface BFormInstance<S, T> extends FormInstance<T> {
 
 	public void setBindingContext(BBindingContext context);
 

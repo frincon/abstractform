@@ -53,7 +53,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class VaadinFormToolkit implements FormToolkit<VaadinFormInstance> {
+public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component, VaadinFormInstance> {
 
 	@Override
 	public VaadinFormInstance buildForm(Form form, Map<String, Object> extraObjects) {

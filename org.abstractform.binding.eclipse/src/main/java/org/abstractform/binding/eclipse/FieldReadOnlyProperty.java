@@ -35,13 +35,13 @@ public class FieldReadOnlyProperty extends SimpleValueProperty {
 
 	@Override
 	protected Object doGetValue(Object source) {
-		BFormInstance<?> form = (BFormInstance<?>) source;
+		BFormInstance<?, ?> form = (BFormInstance<?, ?>) source;
 		return form.isFieldReadOnly(fieldId);
 	}
 
 	@Override
 	protected void doSetValue(Object source, Object value) {
-		BFormInstance<?> form = (BFormInstance<?>) source;
+		BFormInstance<?, ?> form = (BFormInstance<?, ?>) source;
 		form.setFieldReadOnly(fieldId, (Boolean) value);
 	}
 

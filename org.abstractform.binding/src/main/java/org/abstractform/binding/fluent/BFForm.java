@@ -28,7 +28,7 @@ public class BFForm<S, T> extends FForm implements BForm<S, T> {
 
 	private boolean validationSummaryVisible = true;
 
-	private CompoundValidator<BFormInstance<S>> validator = new CompoundValidator<BFormInstance<S>>();
+	private CompoundValidator<BFormInstance<S, ?>> validator = new CompoundValidator<BFormInstance<S, ?>>();
 
 	public BFForm(String id, String name, Class<T> beanClass) {
 		super(id, name);
@@ -70,7 +70,7 @@ public class BFForm<S, T> extends FForm implements BForm<S, T> {
 	}
 
 	@Override
-	public BPresenter createPresenter(BFormInstance<S> formInstance, S model) {
+	public BPresenter createPresenter(BFormInstance<S, ?> formInstance, S model) {
 		return new BFBeanBasedPresenter<S>(model);
 	}
 
@@ -93,7 +93,7 @@ public class BFForm<S, T> extends FForm implements BForm<S, T> {
 	 * @see org.abstractform.binding.BForm#getValidator()
 	 */
 	@Override
-	public Validator<BFormInstance<S>> getValidator() {
+	public Validator<BFormInstance<S, ?>> getValidator() {
 		return validator;
 	}
 
@@ -103,7 +103,7 @@ public class BFForm<S, T> extends FForm implements BForm<S, T> {
 	 * @param validator
 	 * @return
 	 */
-	public BFForm<S, T> validator(Validator<BFormInstance<S>> validator) {
+	public BFForm<S, T> validator(Validator<BFormInstance<S, ?>> validator) {
 		this.validator.addValidator(validator);
 		return this;
 	}

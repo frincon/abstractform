@@ -15,8 +15,21 @@
  */
 package org.abstractform.core;
 
+/**
+ * Drawer is a component that represents a container that can be collapsed or expanded
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface Drawer extends Container {
 
+	/**
+	 * Returns the name of the drawer
+	 * 
+	 * In most cases the name is used to render the drawer
+	 * 
+	 * @return The name of the drawer
+	 */
 	public String getName();
-	
+
 }

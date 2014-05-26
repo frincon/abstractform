@@ -77,7 +77,7 @@ public class TestBindingEclipseApi {
 		assertEquals("Created", field.getName());
 		assertEquals(Field.TYPE_DATETIME, field.getType());
 
-		BFormInstance<BusinessPartner> mockForm = mock(BFormInstance.class);
+		BFormInstance<BusinessPartner, ?> mockForm = mock(BFormInstance.class);
 		BusinessPartner bean = new BusinessPartner();
 		bean.setName(ST_NAME);
 		bean.setCifCode(ST_CIF);
@@ -144,7 +144,7 @@ public class TestBindingEclipseApi {
 	@Test
 	public void testFormValidator() {
 		SampleForm exampleForm = new SampleForm();
-		BFormInstance<BusinessPartner> mockForm = mock(BFormInstance.class);
+		BFormInstance<BusinessPartner, ?> mockForm = mock(BFormInstance.class);
 		BusinessPartner bean = new BusinessPartner();
 		bean.setName(ST_NAME);
 		bean.setCifCode(ST_CIF);

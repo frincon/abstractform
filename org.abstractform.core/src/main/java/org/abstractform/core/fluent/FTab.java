@@ -17,6 +17,11 @@ package org.abstractform.core.fluent;
 
 import org.abstractform.core.Tab;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public class FTab extends FAbstractContainer implements Tab {
 
 	private String name;

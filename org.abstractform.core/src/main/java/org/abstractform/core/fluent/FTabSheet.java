@@ -19,19 +19,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.abstractform.core.Component;
+import org.abstractform.core.Tab;
 import org.abstractform.core.TabSheet;
 
 public class FTabSheet extends FAbstractComponent implements TabSheet {
 
-	private List<Component> containerList = new ArrayList<Component>();
+	private List<Tab> containerList = new ArrayList<Tab>();
 
 	protected FTabSheet(String id) {
 		super(id);
 	}
 
 	@Override
-	public final List<Component> getChildList() {
+	public final List<Tab> getChildList() {
 		return Collections.unmodifiableList(containerList);
 	}
 
@@ -41,7 +41,7 @@ public class FTabSheet extends FAbstractComponent implements TabSheet {
 		return tab;
 	}
 
-	protected synchronized void addComponent(Component component) {
+	protected synchronized void addComponent(Tab component) {
 		containerList.add(component);
 	}
 

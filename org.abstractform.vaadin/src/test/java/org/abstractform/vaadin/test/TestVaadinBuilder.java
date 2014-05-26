@@ -15,8 +15,8 @@
  */
 package org.abstractform.vaadin.test;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import javax.management.ServiceNotFoundException;
 
@@ -54,7 +54,7 @@ public class TestVaadinBuilder {
 
 	@Test
 	public void testServiceLoader() throws ServiceNotFoundException {
-		FormToolkit<VaadinFormInstance> toolkit = FormService.getInstance().getFormToolkit(VaadinFormInstance.class);
+		FormToolkit<Component, VaadinFormInstance> toolkit = FormService.getInstance().getFormToolkit(VaadinFormInstance.class);
 
 		Form form = new SampleForm();
 		VaadinFormInstance instance = toolkit.buildForm(form);

@@ -38,12 +38,12 @@ public class ErrorComponentProperty extends SimpleValueProperty {
 	@Override
 	protected Object doGetValue(Object source) {
 		// TODO Check if properly run
-		return null; 
+		return null;
 	}
 
 	@Override
 	protected void doSetValue(Object source, Object value) {
-		BFormInstance<?> form = (BFormInstance<?>) source;
+		BFormInstance<?, ?> form = (BFormInstance<?, ?>) source;
 		form.setError(fieldId, (List<String>) value);
 	}
 

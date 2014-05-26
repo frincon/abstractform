@@ -29,10 +29,10 @@ public interface BForm<S, T> extends Form {
 	 *            Initial value, can be null
 	 * @return A presenter. The return value can't be null!!
 	 */
-	public BPresenter createPresenter(BFormInstance<S> formInstance, S model);
+	public BPresenter createPresenter(BFormInstance<S, ?> formInstance, S model);
 
 	public boolean isValidationSummaryVisible();
 
-	public Validator<BFormInstance<S>> getValidator();
+	public Validator<BFormInstance<S, ?>> getValidator();
 
 }

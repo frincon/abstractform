@@ -15,6 +15,15 @@
  */
 package org.abstractform.core;
 
+import java.util.List;
+
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface TabSheet extends Container {
+
+	public List<Tab> getChildList();
 
 }

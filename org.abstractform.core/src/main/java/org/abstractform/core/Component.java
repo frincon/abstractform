@@ -15,8 +15,21 @@
  */
 package org.abstractform.core;
 
+/**
+ * Base class of all components in the form
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface Component {
 
+	/**
+	 * Returns the id of the component
+	 * 
+	 * The id of the component must be unique in a form.
+	 * 
+	 * @return The id of the component
+	 */
 	public String getId();
 
 }

@@ -17,8 +17,19 @@ package org.abstractform.core;
 
 import java.util.List;
 
+/**
+ * The base class of all components that contains other components
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface Container extends Component {
 
-	public List<Component> getChildList();
+	/**
+	 * Returns the list of the child components
+	 * 
+	 * @return A unmodifiable list of child components that this container contains
+	 */
+	public List<? extends Component> getChildList();
 
 }

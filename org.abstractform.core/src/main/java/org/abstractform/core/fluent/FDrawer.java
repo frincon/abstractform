@@ -17,6 +17,11 @@ package org.abstractform.core.fluent;
 
 import org.abstractform.core.Drawer;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public class FDrawer extends FAbstractContainer implements Drawer {
 
 	private String name;

@@ -17,6 +17,11 @@ package org.abstractform.core.fluent;
 
 import org.abstractform.core.Form;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public class FForm extends FAbstractContainer implements Form {
 
 	private String name;

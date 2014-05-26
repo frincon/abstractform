@@ -20,6 +20,11 @@ import java.util.Map;
 
 import org.abstractform.core.Field;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public class FField extends FAbstractComponent implements Field {
 
 	private String name;

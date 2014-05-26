@@ -17,6 +17,11 @@ package org.abstractform.core.fluent;
 
 import org.abstractform.core.Section;
 
+/**
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public class FSection extends FAbstractContainer implements Section {
 
 	private String name;

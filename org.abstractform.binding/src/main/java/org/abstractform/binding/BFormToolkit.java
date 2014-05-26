@@ -19,14 +19,14 @@ import java.util.Map;
 
 import org.abstractform.core.FormToolkit;
 
-public interface BFormToolkit<T extends BFormInstance> extends FormToolkit<T> {
+public interface BFormToolkit<S, T extends BFormInstance<?, S>> extends FormToolkit<S, T> {
 
-	public <S> BFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects,
+	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects,
 			boolean immediate);
 
-	public <S> BFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects);
+	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form, BBindingToolkit bindingToolkit, Map<String, Object> extraObjects);
 
-	public <S> BFormInstance<S> buildForm(BForm<S, ?> form, BBindingToolkit bindingToolkit);
+	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form, BBindingToolkit bindingToolkit);
 
-	public <S> BFormInstance<S> buildForm(BForm<S, ?> form);
+	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form);
 }

@@ -15,8 +15,23 @@
  */
 package org.abstractform.core;
 
+/**
+ * The tab is the component that can be part of a TabSheet.
+ * 
+ * This component is container of other components
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface Tab extends Container {
 
+	/**
+	 * Returns the name of the Tab
+	 * 
+	 * In most cases the name is used to render the tab
+	 * 
+	 * @return The name of the tab
+	 */
 	public String getName();
 
 }
