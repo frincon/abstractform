@@ -65,6 +65,7 @@
 		<module>org.abstractform.itest</module>
 		<module>org.abstractform.sampleapp</module>
 		<module>org.abstractform.test.common</module>
+		<module>site</module>
 	</modules>
 	<properties>
 		<jetty.port>9988</jetty.port>
@@ -178,7 +179,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
