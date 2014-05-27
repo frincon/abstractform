@@ -309,6 +309,7 @@
 						<excludes>
 							<exclude>**/IT*.java</exclude>
 						</excludes>
+						<argLine>${jacoco.agent.test.argLine}</argLine>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -325,10 +326,78 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>0.7.1.201405082137</version>
+					<executions>
+						<execution>
+							<id>agent-test</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<phase>initialize</phase>
+							<configuration>
+								<propertyName>jacoco.agent.test.argLine</propertyName> <!-- default: argLine -->
+								<destFile>${project.build.directory}/jacoco-execs/jacoco-tests.exec</destFile> <!-- agent -->
+							</configuration>
+						</execution>
+						<execution>
+							<id>agent-integration</id>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+							<phase>initialize</phase>
+							<configuration>
+								<propertyName>jacoco.agent.integration.argLine</propertyName> <!-- default: argLine -->
+								<destFile>${project.build.directory}/jacoco-execs/jacoco-integration.exec</destFile> <!-- agent -->
+							</configuration>
+						</execution>
+						<execution>
+							<id>merge</id>
+							<goals>
+								<goal>merge</goal>
+							</goals>
+							<phase>post-integration-test</phase>
+							<configuration>
+								<fileSets>
+									<fileSet>
+										<directory>${project.build.directory}/jacoco-execs</directory>
+										<includes>
+											<include>*.exec</include>
+										</includes>
+									</fileSet>
+								</fileSets>
+								<destFile>${project.build.directory}/coverage-merged/jacoco.exec</destFile>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>2.17</version>
+					<configuration>
+						<argLine>${jacoco.agent.argLine}</argLine>
+					</configuration>
+					<executions>
+					<!-- States that both integration-test and verify goals of the Failsafe 
+						Maven plugin are executed. -->
+						<execution>
+							<id>integration-tests</id>
+							<goals>
+								<goal>integration-test</goal>
+								<goal>verify</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -338,45 +407,9 @@
 						<goals>
 							<goal>test-jar</goal>
 						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.1.201405082137</version>
-				<configuration>
-					<propertyName>jacoco.agent.argLine</propertyName> <!-- default: argLine -->
-					<destFile>${project.build.directory}/jacoco-integration.exec</destFile> <!-- agent -->
-					<dataFile>${project.build.directory}/jacoco-integration.exec</dataFile> <!-- report -->
-				</configuration>
-				<executions>
-					<execution>
-						<id>agent</id>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.17</version>
-				<configuration>
-					<reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-					<argLine>${jacoco.agent.argLine}</argLine>
-				</configuration>
-				<executions>
-					<!-- States that both integration-test and verify goals of the Failsafe 
-						Maven plugin are executed. -->
-					<execution>
-						<id>integration-tests</id>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
+						<configuration>
+							<skipIfEmpty>true</skipIfEmpty>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -483,6 +516,7 @@
 			<plugin>
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.3</version>
+				<inherited>false</inherited>
 			</plugin>
 
 		</plugins>
@@ -568,11 +602,6 @@
 				<configuration>
 					<aggregate>true</aggregate>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.1.201405082137</version>
 			</plugin>
 		</plugins>
 	</reporting>
