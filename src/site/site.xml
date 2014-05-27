@@ -27,6 +27,7 @@
 			<item name="FAQ" href="faq.html" />
 		</menu>
 		<menu name="Documentation">
+			<item name="Tutorial" href="tutorial.html" />
 			<item name="API Javadoc" href="apidocs/index.html" />
 			<item name="License" href="license.html" />
 		</menu>
