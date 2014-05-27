@@ -16,9 +16,13 @@
 package org.abstractform.binding.fluent.table;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.abstractform.binding.fluent.BFField;
+import org.abstractform.binding.fluent.BeanConstants;
+import org.abstractform.binding.internal.fluent.BFFieldFactoryProvider;
 import org.abstractform.core.fluent.table.IFTable;
 import org.abstractform.core.table.TableConstants;
 
@@ -27,8 +31,8 @@ public class BFTable extends BFField implements IFTable, TableConstants {
 	private Class<?> elementsClass;
 	private List<BFTableField> tableFieldList = new ArrayList<BFTableField>();
 
-	public BFTable(String id, String name, Class<?> beanClass, String propertyName) {
-		super(id, name, beanClass, propertyName);
+	public BFTable(String id, String name, String propertyName) {
+		super(id, name, propertyName);
 		setType(TYPE_TABLE);
 		setPageLenght(DEFAULT_PAGE_LENGTH);
 		setExtra(EXTRA_TABLE_FIELD_LIST, tableFieldList);
@@ -36,9 +40,14 @@ public class BFTable extends BFField implements IFTable, TableConstants {
 
 	@Override
 	public BFTableField addTableField(String name, String propertyName) {
-		BFTableField tableField = new BFTableField(null, name, elementsClass, propertyName);
-		tableFieldList.add(tableField);
-		return tableField;
+		Map<String, Object> extraObjects = new HashMap<String, Object>();
+		if (elementsClass != null) {
+			extraObjects.put(BeanConstants.EXTRA_OBJECT_BEAN_CLASS, elementsClass);
+		}
+		BFTableField field = BFFieldFactoryProvider.getInstance().getBFFieldFactory()
+				.buildBFField(null, name, propertyName, BFTableField.class, extraObjects);
+		tableFieldList.add(field);
+		return field;
 	}
 
 	public Class<?> getElementsClass() {

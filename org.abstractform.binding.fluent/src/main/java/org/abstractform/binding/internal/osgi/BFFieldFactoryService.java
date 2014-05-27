@@ -15,6 +15,8 @@
  */
 package org.abstractform.binding.internal.osgi;
 
+import java.util.Map;
+
 import org.abstractform.binding.fluent.BFField;
 import org.abstractform.binding.fluent.BFFieldFactory;
 
@@ -28,19 +30,32 @@ public class BFFieldFactoryService implements BFFieldFactory, Comparable<BFField
 		this.ranking = ranking;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.abstractform.binding.fluent.BFFieldFactory#buildBFField(java.lang.String, java.lang.String, java.lang.String,
+	 * java.util.Map)
+	 */
 	@Override
-	public BFField buildBFField(String id, String name, Class<?> beanClass, String propertyName) {
-		return delegated.buildBFField(id, name, beanClass, propertyName);
+	public BFField buildBFField(String id, String name, String propertyName, Map<String, Object> extraFormObjects) {
+		return delegated.buildBFField(id, name, propertyName, extraFormObjects);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.abstractform.binding.fluent.BFFieldFactory#buildBFField(java.lang.String, java.lang.String, java.lang.String,
+	 * java.lang.Class, java.util.Map)
+	 */
+	@Override
+	public <T extends BFField> T buildBFField(String id, String name, String propertyName, Class<T> fieldClass,
+			Map<String, Object> extraFormObjects) {
+		return delegated.buildBFField(id, name, propertyName, fieldClass, extraFormObjects);
 	}
 
 	@Override
 	public int compareTo(BFFieldFactoryService o) {
 		return Integer.compare(ranking, o.ranking);
-	}
-
-	@Override
-	public <T extends BFField> T buildBFField(String id, String name, Class<?> beanClass, String propertyName, Class<T> fieldClass) {
-		return delegated.buildBFField(id, name, beanClass, propertyName, fieldClass);
 	}
 
 }

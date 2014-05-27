@@ -18,14 +18,34 @@ package org.abstractform.binding;
 import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.Field;
 
+/**
+ * Field of binding form
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
 public interface BField extends Field {
 
-	public Class<?> getBeanClass();
-
+	/**
+	 * The property name that this field will be binding
+	 * 
+	 * @return The property name that this field will be binding
+	 */
 	public String getPropertyName();
 
-	public String getReadOnlyPresenterProperty();
+	/**
+	 * Returns the property name that will be binding to the read only property of the field
+	 * 
+	 * @return The property name that will be binding to the read only property of the field.
+	 *         Null if this field will not be binding its read only property (its readOnly property is fixed)
+	 */
+	public String getReadOnlyPropertyName();
 
+	/**
+	 * Returns the validator of this field
+	 * 
+	 * @return The validator of this field. Null if this field hasn't validator
+	 */
 	public Validator<?> getValidator();
 
 }

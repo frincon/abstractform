@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.PropertyUtils;
  * @author Fernando Rincon Martin <frm.rincon@gmail.com>
  * 
  */
-public abstract class BFBeanBasedOwnPropertiesPresenter<S> extends BFBeanBasedPresenter<S> {
+public abstract class BFBeanBasedOwnPropertiesPresenter<S> extends BeanBasedPresenter<S> {
 
 	private List<String> ownProperties;
 

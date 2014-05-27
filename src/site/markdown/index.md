@@ -9,7 +9,7 @@ Welcome to AbstractForm
 ---------------------
 
 AbstractForm is a framework to build graphical forms for different GUI APIs for Java. With AbstractForm you can define a form
-in different ways and use to render this form the API that you prefer.
+in different ways and render it to different GUI APIs.
 
 Why AbstractForm?
 -----------------

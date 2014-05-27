@@ -26,11 +26,11 @@ import org.abstractform.binding.BPresenter;
 import org.abstractform.binding.fluent.BFBeanBasedOwnPropertiesPresenter;
 import org.abstractform.binding.fluent.BFDrawer;
 import org.abstractform.binding.fluent.BFField;
-import org.abstractform.binding.fluent.BFForm;
 import org.abstractform.binding.fluent.BFSection;
 import org.abstractform.binding.fluent.BFSubForm;
 import org.abstractform.binding.fluent.BFTab;
 import org.abstractform.binding.fluent.BFTabSheet;
+import org.abstractform.binding.fluent.BeanBasedBFForm;
 import org.abstractform.binding.fluent.selector.BFSelector;
 import org.abstractform.binding.fluent.table.BFTable;
 import org.abstractform.binding.validation.EMailValidator;
@@ -42,7 +42,7 @@ import org.abstractform.core.selector.SelectorProviderFactory;
 import org.abstractform.test.common.beans.BusinessPartner;
 import org.abstractform.test.common.beans.Organization;
 
-public class SampleForm extends BFForm<BusinessPartner, BusinessPartner> {
+public class SampleForm extends BeanBasedBFForm<BusinessPartner> {
 
 	public static final Organization ORG1 = new Organization(1, "A0001", "Organizacion de Prueba", "Esta es la descripcion");
 	public static final Organization ORG2 = new Organization(1, "A0002", "Prueba2", "Esta es la descripcion 2");
@@ -118,9 +118,9 @@ public class SampleForm extends BFForm<BusinessPartner, BusinessPartner> {
 	public final BFField F_IS_SUPPLIER = SF_FACETS.addField(0, 2, "fIsSupplier", "Supplier", BusinessPartner.PROPERTY_SUPPLIER)
 			.description("Is supplier?").readOnly(false).required(true);
 	public final BFField F_IS_EMPLOYEE = SF_FACETS.addField(0, 3, "fIsEmployee", "Employee", BusinessPartner.PROPERTY_EMPLOYEE)
-			.description("Is employee?").readOnlyPresenterProperty(Presenter.PROPERTY_EMPLOYEE_READ_ONLY).required(true);
+			.description("Is employee?").readOnlyPropertyName(Presenter.PROPERTY_EMPLOYEE_READ_ONLY).required(true);
 	public final BFField F_IS_AGENT = SF_FACETS.addField(0, 4, "fIsAgent", "Agent", BusinessPartner.PROPERTY_AGENT)
-			.description("Is agent?").readOnlyPresenterProperty(Presenter.PROPERTY_AGENT_READ_ONLY).required(true);
+			.description("Is agent?").readOnlyPropertyName(Presenter.PROPERTY_AGENT_READ_ONLY).required(true);
 
 	public final BFDrawer DR_OTHERS = addDrawer("drOthers", "Others");
 	public final BFSection SE_MORE_DATA = DR_OTHERS.addSection("seMoreData", "More data");

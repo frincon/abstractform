@@ -30,8 +30,8 @@ public class AbstractFormProperties {
 		return new FieldValueProperty(fieldId);
 	}
 
-	public static <T> IValueProperty value(BForm<?, T> form) {
-		return new FormValueProperty<T>(form.getBeanClass());
+	public static <T> IValueProperty value(BForm<T> form) {
+		return new FormValueProperty<T>();
 	}
 
 	public static IValueProperty readOnlyField(String fieldId) {

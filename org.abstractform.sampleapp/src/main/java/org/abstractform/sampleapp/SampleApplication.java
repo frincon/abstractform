@@ -22,7 +22,6 @@ import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormInstance;
 import org.abstractform.binding.BFormService;
 import org.abstractform.binding.BFormToolkit;
-import org.abstractform.binding.vaadin.VaadinBindingFormInstance;
 import org.abstractform.test.common.beans.BusinessPartner;
 import org.abstractform.test.common.beans.BusinessPartnerLocation;
 
@@ -41,12 +40,10 @@ public class SampleApplication extends Application {
 		try {
 			Window main = new Window("Test window");
 			setMainWindow(main);
-			@SuppressWarnings("rawtypes")
-			BFormToolkit<Component, VaadinBindingFormInstance<?>> toolkit = BFormService.getInstance().getFormToolkit(
-					VaadinBindingFormInstance.class);
-			BForm<BusinessPartner, BusinessPartner> form = new SampleForm();
-			final BFormInstance<BusinessPartner, ?> formInstance = toolkit.buildForm(form);
-			main.addComponent((Component) formInstance.getImplementation());
+			BFormToolkit<Component> toolkit = BFormService.getInstance().getFormToolkit(Component.class);
+			BForm<BusinessPartner> form = new SampleForm();
+			final BFormInstance<BusinessPartner, Component> formInstance = toolkit.buildForm(form);
+			main.addComponent(formInstance.getImplementation());
 
 			final BusinessPartner bean1 = new BusinessPartner();
 			bean1.setAbc("A");
@@ -98,6 +95,8 @@ public class SampleApplication extends Application {
 			main.addComponent(but1);
 
 			but1 = new Button("Update Model", new Button.ClickListener() {
+
+				private static final long serialVersionUID = 1L;
 
 				@Override
 				public void buttonClick(ClickEvent event) {

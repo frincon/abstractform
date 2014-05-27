@@ -15,22 +15,15 @@
  */
 package org.abstractform.binding.fluent;
 
-import java.beans.IntrospectionException;
-import java.beans.PropertyDescriptor;
-import java.util.Date;
-
 import org.abstractform.binding.BField;
-import org.abstractform.binding.internal.validation.BeanValidationProvider;
 import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.fluent.FField;
 
 public class BFField extends FField implements BField {
 
-	private Class<?> beanClass;
 	private String propertyName;
-	private String readOnlyPresenterProperty;
+	private String readOnlyPropertyName;
 	private Validator<?> validator;
-	private PropertyDescriptor propertyDescriptor;
 
 	/**
 	 * This constructor is not intented to call from clients, only from field
@@ -41,63 +34,14 @@ public class BFField extends FField implements BField {
 	 * @param beanClass
 	 * @param propertyName
 	 */
-	public BFField(String id, String name, Class<?> beanClass, String propertyName) {
+	public BFField(String id, String name, String propertyName) {
 		super(id, name);
-		this.beanClass = beanClass;
 		this.propertyName = propertyName;
-		try {
-			this.propertyDescriptor = new PropertyDescriptor(propertyName, beanClass);
-			fillFromProperty();
-		} catch (IntrospectionException e) {
-			System.out.println("WARN: Property not found, not filled type neither validation");
-		}
-
 	}
 
-	public Class<?> getBeanClass() {
-		return beanClass;
-	}
-
+	@Override
 	public String getPropertyName() {
 		return propertyName;
-	}
-
-	public BFField fillFromProperty() {
-		fillTypeFromProperty();
-		fillValidationFromProperty();
-		return this;
-	}
-
-	public BFField fillTypeFromProperty() {
-		Class<?> propertyClass = propertyDescriptor.getPropertyType();
-		if (Boolean.class.isAssignableFrom(propertyClass) || boolean.class.isAssignableFrom(propertyClass)) {
-			setType(TYPE_BOOL);
-		} else if (Date.class.isAssignableFrom(propertyClass)) {
-			setType(TYPE_DATETIME);
-		} else if (String.class.isAssignableFrom(propertyClass)) {
-			setType(TYPE_TEXT);
-		} else if (Number.class.isAssignableFrom(propertyClass)) {
-			setType(TYPE_NUMERIC);
-			this.setExtra(EXTRA_NUMBER_CLASS, propertyClass);
-		}
-		return this;
-	}
-
-	/**
-	 * Try to contruct default validator for property.
-	 * 
-	 * The default implementation find Bean Validation Factory (JSR303) if
-	 * exists, construct a validator
-	 * using it
-	 * 
-	 * @return
-	 */
-	public BFField fillValidationFromProperty() {
-		Validator<?> validator = BeanValidationProvider.INSTANCE.buildValidator(beanClass, propertyName);
-		if (validator != null) {
-			setValidator(validator);
-		}
-		return this;
 	}
 
 	@Override
@@ -136,17 +80,22 @@ public class BFField extends FField implements BField {
 		return this;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.abstractform.binding.BField#getReadOnlyPropertyName()
+	 */
 	@Override
-	public String getReadOnlyPresenterProperty() {
-		return readOnlyPresenterProperty;
+	public String getReadOnlyPropertyName() {
+		return readOnlyPropertyName;
 	}
 
-	public void setReadOnlyPresenterProperty(String readOnlyPresenterProperty) {
-		this.readOnlyPresenterProperty = readOnlyPresenterProperty;
+	public void setReadOnlyPropertyName(String readOnlyPropertyName) {
+		this.readOnlyPropertyName = readOnlyPropertyName;
 	}
 
-	public BFField readOnlyPresenterProperty(String readOnlyPresenterProperty) {
-		setReadOnlyPresenterProperty(readOnlyPresenterProperty);
+	public BFField readOnlyPropertyName(String readOnlyPropertyName) {
+		setReadOnlyPropertyName(readOnlyPropertyName);
 		return this;
 	}
 
@@ -167,10 +116,6 @@ public class BFField extends FField implements BField {
 	public BFField extra(String key, Object extraObject) {
 		super.extra(key, extraObject);
 		return this;
-	}
-
-	public PropertyDescriptor getPropertyDescriptor() {
-		return propertyDescriptor;
 	}
 
 }

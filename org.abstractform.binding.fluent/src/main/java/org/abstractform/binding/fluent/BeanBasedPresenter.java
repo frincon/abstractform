@@ -19,9 +19,9 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.beanutils.PropertyUtils;
 
-public class BFBeanBasedPresenter<S> extends BFAbstractPresenter<S> {
+public class BeanBasedPresenter<S> extends BFAbstractPresenter<S> {
 
-	public BFBeanBasedPresenter(S model) {
+	public BeanBasedPresenter(S model) {
 		super(model);
 	}
 

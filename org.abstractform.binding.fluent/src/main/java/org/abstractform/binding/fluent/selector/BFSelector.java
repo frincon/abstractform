@@ -24,8 +24,8 @@ import org.abstractform.core.selector.SelectorProviderFactory;
 
 public class BFSelector extends BFField implements IFSelector {
 
-	public BFSelector(String id, String name, Class<?> beanClass, String propertyName) {
-		super(id, name, beanClass, propertyName);
+	public BFSelector(String id, String name, String propertyName) {
+		super(id, name, propertyName);
 		setType(SelectorConstants.TYPE_SELECTOR);
 	}
 
@@ -60,8 +60,8 @@ public class BFSelector extends BFField implements IFSelector {
 	}
 
 	@Override
-	public BFSelector readOnlyPresenterProperty(String readOnlyPresenterProperty) {
-		return (BFSelector) super.readOnlyPresenterProperty(readOnlyPresenterProperty);
+	public BFSelector readOnlyPropertyName(String readOnlyPropertyName) {
+		return (BFSelector) super.readOnlyPropertyName(readOnlyPropertyName);
 	}
 
 	@Override

@@ -19,14 +19,25 @@ import java.util.Map;
 
 import org.abstractform.core.FormToolkit;
 
-public interface BFormToolkit<S, T extends BFormInstance<?, S>> extends FormToolkit<S, T> {
+/**
+ * /**
+ * Interface that must be implement the specific form builder for specific form instance type.
+ * 
+ * This form toolkit is binding aware and construct forms with binding capabilities
+ * 
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ * @param <S>
+ *            The class of the component for especific implementation
+ */
+public interface BFormToolkit<S> extends FormToolkit<S> {
 
-	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form, BindingToolkit bindingToolkit, Map<String, Object> extraObjects,
+	public <U> BFormInstance<U, S> buildForm(BForm<U> form, BindingToolkit bindingToolkit, Map<String, Object> extraObjects,
 			boolean immediate);
 
-	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form, BindingToolkit bindingToolkit, Map<String, Object> extraObjects);
+	public <U> BFormInstance<U, S> buildForm(BForm<U> form, BindingToolkit bindingToolkit, Map<String, Object> extraObjects);
 
-	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form, BindingToolkit bindingToolkit);
+	public <U> BFormInstance<U, S> buildForm(BForm<U> form, BindingToolkit bindingToolkit);
 
-	public <U> BFormInstance<U, S> buildForm(BForm<U, ?> form);
+	public <U> BFormInstance<U, S> buildForm(BForm<U> form);
 }

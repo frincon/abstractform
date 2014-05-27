@@ -72,6 +72,14 @@
 		</site>
 	</distributionManagement>
 
+	<mailingLists>
+		<mailingList>
+			<archive>http://groups.google.com/group/abstractform</archive>
+			<name>AbstractForm Mailing List</name>
+			<post>abstractform@googlegroups.com</post>
+			<subscribe>abstractform+subscribe@googlegroups.com</subscribe>
+		</mailingList>
+	</mailingLists>
 	<modules>
 		<module>org.abstractform.core</module>
 		<module>org.abstractform.vaadin</module>
@@ -558,7 +566,7 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-							<report>project-team</report>
+							<report>mailing-list</report>
 							<report>cim</report>
 							<report>issue-tracking</report>
 							<report>license</report>

@@ -15,20 +15,22 @@
  */
 package org.abstractform.binding.fluent;
 
+import java.util.Map;
+
 import org.abstractform.core.fluent.FTabSheet;
 
 public class BFTabSheet extends FTabSheet {
 
-	private Class<?> beanClass;
+	private Map<String, Object> extraFormObjects;
 
-	protected BFTabSheet(String id, Class<?> beanClass) {
+	protected BFTabSheet(String id, Map<String, Object> extraFormObjects) {
 		super(id);
-		this.beanClass = beanClass;
+		this.extraFormObjects = extraFormObjects;
 	}
 
 	@Override
 	public BFTab addTab(String id, String name) {
-		BFTab tab = new BFTab(id, name, beanClass);
+		BFTab tab = new BFTab(id, name, extraFormObjects);
 		addComponent(tab);
 		return tab;
 	}

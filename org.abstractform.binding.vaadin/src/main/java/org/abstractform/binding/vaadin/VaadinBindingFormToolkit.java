@@ -20,10 +20,10 @@ import java.util.Map;
 
 import javax.management.ServiceNotFoundException;
 
-import org.abstractform.binding.BindingService;
-import org.abstractform.binding.BindingToolkit;
 import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormToolkit;
+import org.abstractform.binding.BindingService;
+import org.abstractform.binding.BindingToolkit;
 import org.abstractform.binding.vaadin.internal.VaadinBindingFormInstanceImpl;
 import org.abstractform.core.Field;
 import org.abstractform.core.Form;
@@ -44,21 +44,21 @@ import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("rawtypes")
-public class VaadinBindingFormToolkit implements BFormToolkit<Component, VaadinBindingFormInstance<?>> {
+public class VaadinBindingFormToolkit implements BFormToolkit<Component> {
 
-	private FormToolkit<Component, VaadinFormInstance> delegateToolKit;
+	private FormToolkit<Component> delegateToolKit;
 
 	public VaadinBindingFormToolkit() throws ServiceNotFoundException {
-		delegateToolKit = FormService.getInstance().getFormToolkit(VaadinFormInstance.class);
+		delegateToolKit = FormService.getInstance().getFormToolkit(Component.class);
 	}
 
-	public VaadinBindingFormToolkit(FormToolkit<Component, VaadinFormInstance> delegateToolKit) {
+	public VaadinBindingFormToolkit(FormToolkit<Component> delegateToolKit) {
 		this.delegateToolKit = delegateToolKit;
 	}
 
 	@Override
 	public VaadinBindingFormInstance buildForm(Form form, Map<String, Object> extraObjects) {
-		VaadinFormInstance delegate = delegateToolKit.buildForm(form, extraObjects);
+		VaadinFormInstance delegate = (VaadinFormInstance) delegateToolKit.buildForm(form, extraObjects);
 		ComponentContainer c = addValidationSummaryField(delegate.getImplementation(), false);
 		VaadinBindingFormInstance<?> formInstance = new VaadinBindingFormInstanceImpl<Object>(c, (ComponentContainer) c
 				.getComponentIterator().next(), delegate);
@@ -106,18 +106,8 @@ public class VaadinBindingFormToolkit implements BFormToolkit<Component, VaadinB
 	}
 
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form, BindingToolkit bindingToolkit,
-			Map<String, Object> extraObjects) {
+	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S> form, BindingToolkit bindingToolkit, Map<String, Object> extraObjects) {
 		return buildForm(form, bindingToolkit, extraObjects, true);
-	}
-
-	/**
-	 * @see org.abstractform.core.FormToolkit#getFormInstanceClass()
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public Class<VaadinBindingFormInstance<?>> getFormInstanceClass() {
-		return (Class<VaadinBindingFormInstance<?>>) (Class<?>) VaadinBindingFormInstance.class;
 	}
 
 	/*
@@ -126,7 +116,7 @@ public class VaadinBindingFormToolkit implements BFormToolkit<Component, VaadinB
 	 * @see org.abstractform.binding.BFormToolkit#buildForm(org.abstractform.binding.BForm)
 	 */
 	@Override
-	public <U> VaadinBindingFormInstance<U> buildForm(BForm<U, ?> form) {
+	public <U> VaadinBindingFormInstance<U> buildForm(BForm<U> form) {
 		try {
 			return buildForm(form, BindingService.getInstance().getBindingToolkit());
 		} catch (ServiceNotFoundException e) {
@@ -145,20 +135,30 @@ public class VaadinBindingFormToolkit implements BFormToolkit<Component, VaadinB
 	}
 
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form, BindingToolkit bindingToolkit) {
+	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S> form, BindingToolkit bindingToolkit) {
 		return buildForm(form, bindingToolkit, Collections.<String, Object> emptyMap());
 	}
 
 	@Override
-	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S, ?> form, BindingToolkit bindingToolkit,
+	public <S> VaadinBindingFormInstance<S> buildForm(BForm<S> form, BindingToolkit bindingToolkit,
 			Map<String, Object> extraObjects, boolean immediate) {
-		VaadinFormInstance delegate = delegateToolKit.buildForm(form, extraObjects);
+		VaadinFormInstance delegate = (VaadinFormInstance) delegateToolKit.buildForm(form, extraObjects);
 		ComponentContainer c = addValidationSummaryField(delegate.getImplementation(), form.isValidationSummaryVisible());
 		VaadinBindingFormInstanceImpl<S> instance = new VaadinBindingFormInstanceImpl<S>(c, (ComponentContainer) c
 				.getComponentIterator().next(), delegate);
 		bindingToolkit.bindFields(instance, form);
 		replaceFormInstanceReferences(delegate, instance);
 		return instance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.abstractform.core.FormToolkit#getImplementationClass()
+	 */
+	@Override
+	public Class<Component> getImplementationClass() {
+		return Component.class;
 	}
 
 }

@@ -53,7 +53,7 @@ import com.vaadin.ui.Table;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 
-public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component, VaadinFormInstance> {
+public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component> {
 
 	@Override
 	public VaadinFormInstance buildForm(Form form, Map<String, Object> extraObjects) {
@@ -285,11 +285,6 @@ public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component, V
 		return ret;
 	}
 
-	@Override
-	public Class<VaadinFormInstance> getFormInstanceClass() {
-		return VaadinFormInstance.class;
-	}
-
 	protected AbstractComponent buildTableField(Field field, Map<String, Object> extraObjects) {
 		Table table = new Table();
 		table.setRowHeaderMode(Table.ROW_HEADER_MODE_INDEX);
@@ -303,6 +298,16 @@ public class VaadinFormToolkit implements FormToolkit<com.vaadin.ui.Component, V
 		table.setPageLength((Integer) field.getExtra(TableConstants.EXTRA_TABLE_PAGE_LENGHT));
 		return table;
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.abstractform.core.FormToolkit#getImplementationClass()
+	 */
+	@Override
+	public Class<com.vaadin.ui.Component> getImplementationClass() {
+		return com.vaadin.ui.Component.class;
 	}
 
 }

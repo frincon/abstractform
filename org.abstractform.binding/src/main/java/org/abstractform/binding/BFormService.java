@@ -39,13 +39,12 @@ public class BFormService {
 	}
 
 	@SuppressWarnings({ "unchecked" })
-	public <S, T extends BFormInstance<?, S>> BFormToolkit<S, T> getFormToolkit(Class<T> formInstanceRequired)
-			throws ServiceNotFoundException {
+	public <S> BFormToolkit<S> getFormToolkit(Class<S> implementationClass) throws ServiceNotFoundException {
 		Iterator<BFormToolkit> it = loader.iterator();
 		BFormToolkit toolkit = null;
 		while (toolkit == null && it.hasNext()) {
 			BFormToolkit tl = it.next();
-			if (formInstanceRequired.isAssignableFrom(tl.getFormInstanceClass())) {
+			if (implementationClass.isAssignableFrom(tl.getImplementationClass())) {
 				toolkit = tl;
 			}
 		}

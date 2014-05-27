@@ -52,20 +52,19 @@ public class FormService {
 	/**
 	 * Find in the Service Loader a {@link FormToolkit} that returns the required form instance type of rendered forms
 	 * 
-	 * @param formInstanceRequired
-	 *            The specific FormInstance class that the form toolkit must return when render form
-	 * @return The FormToolkit that build form instances of the given form instance class
+	 * @param implementationClass
+	 *            The specific implementation class that the form toolkit must return
+	 * @return The FormToolkit that build form instances of that its specific implementation returns the given class
 	 * @throws ServiceNotFoundException
 	 *             When a FormToolkit is not found
 	 */
 	@SuppressWarnings("unchecked")
-	public <S, T extends FormInstance<S>> FormToolkit<S, T> getFormToolkit(Class<T> formInstanceRequired)
-			throws ServiceNotFoundException {
+	public <S> FormToolkit<S> getFormToolkit(Class<S> implementationClass) throws ServiceNotFoundException {
 		Iterator<FormToolkit> it = loader.iterator();
 		FormToolkit toolkit = null;
 		while (toolkit == null && it.hasNext()) {
 			FormToolkit tl = it.next();
-			if (formInstanceRequired.isAssignableFrom(tl.getFormInstanceClass())) {
+			if (implementationClass.isAssignableFrom(tl.getImplementationClass())) {
 				toolkit = tl;
 			}
 		}

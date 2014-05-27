@@ -27,8 +27,6 @@ import org.eclipse.core.databinding.property.value.SimpleValueProperty;
 @SuppressWarnings("unchecked")
 public class FormValueProperty<T> extends SimpleValueProperty {
 
-	private Class<T> beanClass;
-
 	private class FormValuePropertyListener extends NativePropertyListener implements PropertyChangeListener {
 
 		public FormValuePropertyListener(ISimplePropertyListener listener) {
@@ -50,10 +48,6 @@ public class FormValueProperty<T> extends SimpleValueProperty {
 			((BFormInstance<?, ?>) source).removeValuePropertyChangeListener(this);
 		}
 
-	}
-
-	public FormValueProperty(Class<T> beanClass) {
-		this.beanClass = beanClass;
 	}
 
 	@Override

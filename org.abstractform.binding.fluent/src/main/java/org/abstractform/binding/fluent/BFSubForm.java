@@ -15,16 +15,18 @@
  */
 package org.abstractform.binding.fluent;
 
+import java.util.Map;
+
 import org.abstractform.binding.internal.fluent.BFFieldFactoryProvider;
 import org.abstractform.core.fluent.FSubForm;
 
 public class BFSubForm extends FSubForm {
 
-	private Class<?> beanClass;
+	private Map<String, Object> extraObjects;
 
-	protected BFSubForm(String id, int columns, Class<?> beanClass) {
+	protected BFSubForm(String id, int columns, Map<String, Object> extraObjects) {
 		super(id, columns);
-		this.beanClass = beanClass;
+		this.extraObjects = extraObjects;
 	}
 
 	/**
@@ -43,14 +45,14 @@ public class BFSubForm extends FSubForm {
 	 * @return The new field generated
 	 */
 	public BFField addField(int row, int column, String id, String name, String propertyName) {
-		BFField field = BFFieldFactoryProvider.getInstance().getBFFieldFactory().buildBFField(id, name, beanClass, propertyName);
+		BFField field = BFFieldFactoryProvider.getInstance().getBFFieldFactory().buildBFField(id, name, propertyName, extraObjects);
 		internalAddField(row, column, field);
 		return field;
 	}
 
 	public <T extends BFField> T addField(int row, int column, String id, String name, String propertyName, Class<T> fieldClass) {
 		T field = BFFieldFactoryProvider.getInstance().getBFFieldFactory()
-				.buildBFField(id, name, beanClass, propertyName, fieldClass);
+				.buildBFField(id, name, propertyName, fieldClass, extraObjects);
 		internalAddField(row, column, field);
 		return field;
 	}

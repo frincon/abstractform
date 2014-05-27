@@ -15,36 +15,51 @@
  */
 package org.abstractform.binding.fluent;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.abstractform.binding.BForm;
 import org.abstractform.binding.BFormInstance;
-import org.abstractform.binding.BPresenter;
 import org.abstractform.binding.validation.CompoundValidator;
 import org.abstractform.binding.validation.Validator;
 import org.abstractform.core.fluent.FForm;
 
-public class BFForm<S, T> extends FForm implements BForm<S, T> {
-
-	private Class<T> beanClass;
+public abstract class BFForm<S> extends FForm implements BForm<S> {
 
 	private boolean validationSummaryVisible = true;
 
+	private Map<String, Object> extraFormObjects = new HashMap<String, Object>();
+
 	private CompoundValidator<BFormInstance<S, ?>> validator = new CompoundValidator<BFormInstance<S, ?>>();
 
-	public BFForm(String id, String name, Class<T> beanClass) {
+	public BFForm(String id, String name) {
+		this(id, name, Collections.<String, Object> emptyMap());
+	}
+
+	public BFForm(String id, String name, Map<String, Object> extraFormObjects) {
 		super(id, name);
-		this.beanClass = beanClass;
+		this.extraFormObjects.putAll(extraFormObjects);
+	}
+
+	public void putExtraFormObject(String key, Object value) {
+		extraFormObjects.put(key, value);
+	}
+
+	public Object getExtraFormObject(String key) {
+		return extraFormObjects.get(key);
 	}
 
 	@Override
 	public BFSubForm addSubForm(String id, int columns) {
-		BFSubForm subForm = new BFSubForm(id, columns, beanClass);
+		BFSubForm subForm = new BFSubForm(id, columns, extraFormObjects);
 		addComponent(subForm);
 		return subForm;
 	}
 
 	@Override
 	public BFDrawer addDrawer(String id, String name) {
-		BFDrawer drawer = new BFDrawer(id, name, beanClass);
+		BFDrawer drawer = new BFDrawer(id, name, extraFormObjects);
 		addComponent(drawer);
 		return drawer;
 
@@ -52,26 +67,16 @@ public class BFForm<S, T> extends FForm implements BForm<S, T> {
 
 	@Override
 	public BFSection addSection(String id, String name) {
-		BFSection section = new BFSection(id, name, beanClass);
+		BFSection section = new BFSection(id, name, extraFormObjects);
 		addComponent(section);
 		return section;
 	}
 
 	@Override
 	public BFTabSheet addTabSheet(String id) {
-		BFTabSheet tabSheet = new BFTabSheet(id, beanClass);
+		BFTabSheet tabSheet = new BFTabSheet(id, extraFormObjects);
 		addComponent(tabSheet);
 		return tabSheet;
-	}
-
-	@Override
-	public Class<T> getBeanClass() {
-		return beanClass;
-	}
-
-	@Override
-	public BPresenter createPresenter(BFormInstance<S, ?> formInstance, S model) {
-		return new BFBeanBasedPresenter<S>(model);
 	}
 
 	public boolean isValidationSummaryVisible() {
@@ -82,7 +87,7 @@ public class BFForm<S, T> extends FForm implements BForm<S, T> {
 		this.validationSummaryVisible = validationSummaryVisible;
 	}
 
-	public BFForm<S, T> validationSummaryVisible(boolean validationSummaryVisible) {
+	public BFForm<S> validationSummaryVisible(boolean validationSummaryVisible) {
 		setValidationSummaryVisible(validationSummaryVisible);
 		return this;
 	}
@@ -103,7 +108,7 @@ public class BFForm<S, T> extends FForm implements BForm<S, T> {
 	 * @param validator
 	 * @return
 	 */
-	public BFForm<S, T> validator(Validator<BFormInstance<S, ?>> validator) {
+	public BFForm<S> validator(Validator<BFormInstance<S, ?>> validator) {
 		this.validator.addValidator(validator);
 		return this;
 	}

@@ -15,27 +15,29 @@
  */
 package org.abstractform.binding.fluent;
 
+import java.util.Map;
+
 import org.abstractform.core.fluent.FSection;
 
 public class BFSection extends FSection {
 
-	private Class<?> beanClass;
+	private Map<String, Object> extraFormObjects;
 
-	public BFSection(String id, String name, Class<?> beanClass) {
+	public BFSection(String id, String name, Map<String, Object> extraFormObjects) {
 		super(id, name);
-		this.beanClass = beanClass;
+		this.extraFormObjects = extraFormObjects;
 	}
 
 	@Override
 	public BFSubForm addSubForm(String id, int columns) {
-		BFSubForm subForm = new BFSubForm(id, columns, beanClass);
+		BFSubForm subForm = new BFSubForm(id, columns, extraFormObjects);
 		addComponent(subForm);
 		return subForm;
 	}
 
 	@Override
 	public BFDrawer addDrawer(String id, String name) {
-		BFDrawer drawer = new BFDrawer(id, name, beanClass);
+		BFDrawer drawer = new BFDrawer(id, name, extraFormObjects);
 		addComponent(drawer);
 		return drawer;
 
@@ -43,18 +45,16 @@ public class BFSection extends FSection {
 
 	@Override
 	public BFSection addSection(String id, String name) {
-		BFSection section = new BFSection(id, name, beanClass);
+		BFSection section = new BFSection(id, name, extraFormObjects);
 		addComponent(section);
 		return section;
 	}
 
 	@Override
 	public BFTabSheet addTabSheet(String id) {
-		BFTabSheet tabSheet = new BFTabSheet(id, beanClass);
+		BFTabSheet tabSheet = new BFTabSheet(id, extraFormObjects);
 		addComponent(tabSheet);
 		return tabSheet;
 	}
-	
-	
 
 }

@@ -23,12 +23,19 @@
 		-->
 		<menu name="About">
 			<item name="Overview" href="index.html" />
+			<item name="News" href="news.html" />
 			<item name="FAQ" href="faq.html" />
-			<item name="Xdoc Example" href="xdoc.html" />
 		</menu>
-		<menu ref="reports" />
+		<menu name="Documentation">
+			<item name="API Javadoc" href="apidocs/index.html" />
+			<item name="License" href="license.html" />
+		</menu>
 		<menu name="Miscellaneous">
 			<item name="Source code on GitHub" href="https://github.com/frincon/abstractform" />
+			<item name="Issue Tracking" href="issue-tracking.html" />
+			<item name="Source repository access" href="source-repository.html" />
+			<item name="Continuos Integration" href="integration.html" />
+			<item name="Mailing List" href="mailing-list.html" />
 		</menu>
 	</body>
 </project>

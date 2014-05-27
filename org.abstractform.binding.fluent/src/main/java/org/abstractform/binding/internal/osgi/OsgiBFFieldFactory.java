@@ -15,6 +15,8 @@
  */
 package org.abstractform.binding.internal.osgi;
 
+import java.util.Map;
+
 import org.abstractform.binding.fluent.BFField;
 import org.abstractform.binding.fluent.BFFieldFactory;
 import org.osgi.util.tracker.ServiceTracker;
@@ -28,10 +30,10 @@ public class OsgiBFFieldFactory implements BFFieldFactory {
 	}
 
 	@Override
-	public BFField buildBFField(String id, String name, Class<?> beanClass, String propertyName) {
+	public BFField buildBFField(String id, String name, String propertyName, Map<String, Object> extraFormObjects) {
 		BFField field = null;
 		for (BFFieldFactory fieldFactory : tracker.getTracked().values()) {
-			field = fieldFactory.buildBFField(id, name, beanClass, propertyName);
+			field = fieldFactory.buildBFField(id, name, propertyName, extraFormObjects);
 			if (field != null) {
 				break;
 			}
@@ -41,10 +43,11 @@ public class OsgiBFFieldFactory implements BFFieldFactory {
 	}
 
 	@Override
-	public <T extends BFField> T buildBFField(String id, String name, Class<?> beanClass, String propertyName, Class<T> fieldClass) {
+	public <T extends BFField> T buildBFField(String id, String name, String propertyName, Class<T> fieldClass,
+			Map<String, Object> extraFormObjects) {
 		T field = null;
 		for (BFFieldFactory fieldFactory : tracker.getTracked().values()) {
-			field = fieldFactory.buildBFField(id, name, beanClass, propertyName, fieldClass);
+			field = fieldFactory.buildBFField(id, name, propertyName, fieldClass, extraFormObjects);
 			if (field != null) {
 				break;
 			}

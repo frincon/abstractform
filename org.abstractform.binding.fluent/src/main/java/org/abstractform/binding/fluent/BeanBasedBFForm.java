@@ -13,17 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.abstractform.core.selector;
 
-import org.abstractform.core.FormInstance;
+package org.abstractform.binding.fluent;
+
+import org.abstractform.binding.BFormInstance;
+import org.abstractform.binding.BPresenter;
 
 /**
- * 
  * @author Fernando Rincon Martin <frm.rincon@gmail.com>
  * 
  */
-public interface SelectorProviderFactory {
+public class BeanBasedBFForm<S> extends BFForm<S> {
 
-	public SelectorProvider<?> createSelectorProvider(FormInstance<?> formInstance);
+	public BeanBasedBFForm(String id, String name, final Class<S> beanClass) {
+		super(id, name);
+		putExtraFormObject(BeanConstants.EXTRA_OBJECT_BEAN_CLASS, beanClass);
+	}
+
+	@Override
+	public BPresenter createPresenter(BFormInstance<S, ?> formInstance, S model) {
+		return new BeanBasedPresenter<S>(model);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Class<S> getBeanClass() {
+		return (Class<S>) getExtraFormObject(BeanConstants.EXTRA_OBJECT_BEAN_CLASS);
+	}
 
 }

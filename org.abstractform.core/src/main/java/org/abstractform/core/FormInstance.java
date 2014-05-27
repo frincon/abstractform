@@ -19,12 +19,14 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 
 /**
- * A form instance represents a form rendered in a especific implementation
+ * A form instance represents a form rendered in a specific implementation
  * 
  * This is the result of the render the form and object of this class allow access to values of fields.
  * 
  * @author Fernando Rincon Martin <frm.rincon@gmail.com>
  * 
+ * @param <S>
+ *            The class of the objects that this form return as specific implementation
  */
 public interface FormInstance<S> {
 

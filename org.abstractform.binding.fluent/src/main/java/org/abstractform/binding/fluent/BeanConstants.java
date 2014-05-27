@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.abstractform.binding.fluent.table;
 
-import org.abstractform.binding.fluent.BFField;
+package org.abstractform.binding.fluent;
 
-public class BFTableField extends BFField {
+/**
+ * @author Fernando Rincon Martin <frm.rincon@gmail.com>
+ * 
+ */
+public interface BeanConstants {
 
-	public BFTableField(String id, String name, String propertyName) {
-		super(id, name, propertyName);
-	}
+	public static final String EXTRA_OBJECT_BEAN_CLASS = "EXTRA_OBJECT_BEAN_CLASS";
 
 }

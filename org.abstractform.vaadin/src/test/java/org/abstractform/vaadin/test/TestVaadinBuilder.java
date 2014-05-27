@@ -54,10 +54,10 @@ public class TestVaadinBuilder {
 
 	@Test
 	public void testServiceLoader() throws ServiceNotFoundException {
-		FormToolkit<Component, VaadinFormInstance> toolkit = FormService.getInstance().getFormToolkit(VaadinFormInstance.class);
+		FormToolkit<Component> toolkit = FormService.getInstance().getFormToolkit(Component.class);
 
 		Form form = new SampleForm();
-		VaadinFormInstance instance = toolkit.buildForm(form);
+		VaadinFormInstance instance = (VaadinFormInstance) toolkit.buildForm(form);
 		assertNotNull(instance);
 		Component component = instance.getImplementation();
 		assertThat(component, instanceOf(VerticalLayout.class));

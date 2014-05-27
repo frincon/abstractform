@@ -4,22 +4,19 @@
   id="General FAQ">
   <part id="General">
     <faq id="where">
-      <question>Where did Maven come from?</question>
+      <question>How can I define a Form?</question>
       <answer>
         <p>
-          Maven was created by a group of software developers who were tired
-          of wasting their time fiddling around with builds and wanted to get
-          down to brass tacks and actually develop software!
+        	Actually, there is one submodule to define a Form with a fluent API. It's planned to create other modules to define a
+        	Form from database and XML but it is not implemented yet.
         </p>
       </answer>
     </faq>
     <faq id="why">
-      <question>Why is Maven so wildly popular?</question>
+      <question>Wich API can I render a Form to?</question>
       <answer>
         <p>
-          Maven saves you so much time in your software development efforts that
-          you will have time to learn a second language, relax ten hours a
-          day, and train for that marathon you've always wanted to run!
+        	Actually, there is one implementation to render the forms to Vaadin Component. 
         </p>
       </answer>
     </faq>
