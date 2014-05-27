@@ -1,6 +1,3 @@
-Overview
-========
-
 News
 ----
 
@@ -8,7 +5,7 @@ News
 
 The AbstractForm projects site is up, including GitHub repositories go live. Users can download source code now.
 
-What is AbstractForm?
+Welcome to AbstractForm
 ---------------------
 
 AbstractForm is a framework to build graphical forms for different GUI APIs for Java. With AbstractForm you can define a form
