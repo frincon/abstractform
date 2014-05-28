@@ -1,3 +1,6 @@
+Download
+========
+
 All downloads include the binaries, the source code, and the javadocs.
 
 0.1.0

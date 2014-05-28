@@ -1,4 +1,7 @@
 News
+====
+
+Latest News
 -----------
 
 ### 28 May 2014: AbstractForm version 0.1.0 was released
