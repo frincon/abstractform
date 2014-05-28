@@ -15,6 +15,7 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
+					<finalName>abstractform</finalName>
 					<descriptors>
 						<descriptor>src/assemble/bin.xml</descriptor>
 					</descriptors>
