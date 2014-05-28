@@ -25,6 +25,7 @@
 			<item name="Overview" href="index.html" />
 			<item name="News" href="news.html" />
 			<item name="FAQ" href="faq.html" />
+			<item name="Download" href="download.html" />
 		</menu>
 		<menu name="Documentation">
 			<item name="Tutorial" href="tutorial.html" />

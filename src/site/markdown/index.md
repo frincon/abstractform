@@ -1,9 +1,10 @@
-News
-----
+Latest News
+-----------
 
-### 26 May 2014: AbstractForm project goes live
+### 28 May 2014: AbstractForm version 0.1.0 was released
 
-The AbstractForm projects site is up, including GitHub repositories go live. Users can download source code now.
+This is the first version released of AbstractForm framework. It comes with support to generate forms to Vaadin, fluent api
+to define forms and binding plugin based on Eclipse Databinding Framework.
 
 Welcome to AbstractForm
 ---------------------
