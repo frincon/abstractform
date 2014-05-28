@@ -1,0 +1,91 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+	<id>bin</id>
+	<formats>
+		<format>tar.gz</format>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<moduleSets>
+		<moduleSet>
+    		
+      		<!-- Enable access to all projects in the current multimodule build! -->
+			<useAllReactorProjects>true</useAllReactorProjects>
+      
+      		<!-- Now, select which projects to include in this module-set. -->
+			<includes>
+				<include>*</include>
+			</includes>
+			<excludes>
+				<exclude>org.abstractform:org.abstractform.test.common</exclude>
+				<exclude>org.abstractform:org.abstractform.sampleapp</exclude>
+				<exclude>org.abstractform:org.abstractform.itest</exclude>
+			</excludes>
+			<binaries>
+				<outputDirectory>lib</outputDirectory>
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+		<moduleSet>
+    		
+      		<!-- Enable access to all projects in the current multimodule build! -->
+			<useAllReactorProjects>true</useAllReactorProjects>
+      
+      		<!-- Now, select which projects to include in this module-set. -->
+			<includes>
+				<include>*</include>
+			</includes>
+			<excludes>
+				<exclude>org.abstractform:org.abstractform.test.common</exclude>
+				<exclude>org.abstractform:org.abstractform.sampleapp</exclude>
+				<exclude>org.abstractform:org.abstractform.itest</exclude>
+			</excludes>
+			<binaries>
+				<attachmentClassifier>javadoc</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>doc</outputDirectory>
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+		<moduleSet>
+    		
+      		<!-- Enable access to all projects in the current multimodule build! -->
+			<useAllReactorProjects>true</useAllReactorProjects>
+      
+      		<!-- Now, select which projects to include in this module-set. -->
+			<includes>
+				<include>*</include>
+			</includes>
+			<excludes>
+				<exclude>org.abstractform:org.abstractform.test.common</exclude>
+				<exclude>org.abstractform:org.abstractform.sampleapp</exclude>
+				<exclude>org.abstractform:org.abstractform.itest</exclude>
+			</excludes>
+			<binaries>
+				<attachmentClassifier>sources</attachmentClassifier>
+				<includeDependencies>false</includeDependencies>
+				<outputDirectory>src</outputDirectory>
+				<unpack>false</unpack>
+			</binaries>
+		</moduleSet>
+	</moduleSets>
+	<dependencySets>
+		<dependencySet>
+			<outputDirectory>lib/third-party</outputDirectory>
+			<excludes>
+				<exclude>org.abstractform:org.abstractform.*</exclude>
+			</excludes>
+		</dependencySet>
+	</dependencySets>
+	<fileSets>
+		<fileSet>
+			<directory>${project.basedir}/src/resources</directory>
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>README*</include>
+				<include>LICENSE*</include>
+				<include>NOTICE*</include>
+			</includes>
+		</fileSet>
+	</fileSets>
+</assembly>

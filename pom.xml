@@ -91,6 +91,7 @@
 		<module>org.abstractform.test.common</module>
 		<module>org.abstractform.core.fluent</module>
 		<module>org.abstractform.binding.fluent</module>
+		<module>assembly</module>
 	</modules>
 	<properties>
 		<jetty.port>9988</jetty.port>
@@ -321,20 +322,6 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-source-plugin</artifactId>
-					<version>2.2.1</version>
-					<executions>
-						<execution>
-							<id>attach-sources</id>
-							<phase>verify</phase>
-							<goals>
-								<goal>jar-no-fork</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>0.7.1.201405082137</version>
@@ -458,6 +445,19 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -474,7 +474,7 @@
 						<configuration>
 							<file>${dependencies.directory}/${dependencies.file1.basename}_${dependencies.file1.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.${dependencies.file1.basename}</artifactId>
+							<artifactId>${dependencies.file1.basename}</artifactId>
 							<version>${dependencies.file1.version}</version>
 							<sources>${dependencies.directory}/${dependencies.file1.basename}.source_${dependencies.file1.version}.jar</sources>
 							<packaging>jar</packaging>
@@ -489,7 +489,7 @@
 						<configuration>
 							<file>${dependencies.directory}/${dependencies.file2.basename}_${dependencies.file2.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.${dependencies.file2.basename}</artifactId>
+							<artifactId>${dependencies.file2.basename}</artifactId>
 							<version>${dependencies.file2.version}</version>
 							<sources>${dependencies.directory}/${dependencies.file2.basename}.source_${dependencies.file2.version}.jar</sources>
 							<packaging>jar</packaging>
@@ -504,7 +504,7 @@
 						<configuration>
 							<file>${dependencies.directory}/${dependencies.file3.basename}_${dependencies.file3.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.${dependencies.file3.basename}</artifactId>
+							<artifactId>${dependencies.file3.basename}</artifactId>
 							<version>${dependencies.file3.version}</version>
 							<sources>${dependencies.directory}/${dependencies.file3.basename}.source_${dependencies.file3.version}.jar</sources>
 							<packaging>jar</packaging>
@@ -519,7 +519,7 @@
 						<configuration>
 							<file>${dependencies.directory}/${dependencies.file4.basename}_${dependencies.file4.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.${dependencies.file4.basename}</artifactId>
+							<artifactId>${dependencies.file4.basename}</artifactId>
 							<version>${dependencies.file4.version}</version>
 							<sources>${dependencies.directory}/${dependencies.file4.basename}.source_${dependencies.file4.version}.jar</sources>
 							<packaging>jar</packaging>
@@ -534,7 +534,7 @@
 						<configuration>
 							<file>${dependencies.directory}/${dependencies.file5.basename}_${dependencies.file5.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.${dependencies.file5.basename}</artifactId>
+							<artifactId>${dependencies.file5.basename}</artifactId>
 							<version>${dependencies.file5.version}</version>
 							<sources>${dependencies.directory}/${dependencies.file5.basename}.source_${dependencies.file5.version}.jar</sources>
 							<packaging>jar</packaging>
@@ -550,7 +550,7 @@
 						<configuration>
 							<file>${dependencies.directory}/${dependencies.file6.basename}_${dependencies.file6.version}.jar</file>
 							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.groupId}.${dependencies.file6.basename}</artifactId>
+							<artifactId>${dependencies.file6.basename}</artifactId>
 							<version>${dependencies.file6.version}</version>
 							<sources>${dependencies.directory}/${dependencies.file6.basename}.source_${dependencies.file6.version}.jar</sources>
 							<packaging>jar</packaging>
@@ -570,27 +570,20 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!-- 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<inherited>false</inherited>
 				<version>2.9.1</version>
 				<configuration>
 				</configuration>
 				<executions>
 					<execution>
-						<id>aggregate</id>
 						<goals>
-							<goal>aggregate</goal>
+							<goal>jar</goal>
 						</goals>
-						<phase>site</phase>
-						<configuration>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			-->
 		</plugins>
 	</build>
 	<dependencyManagement>
