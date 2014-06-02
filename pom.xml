@@ -568,6 +568,11 @@
 						<artifactId>wagon-ftp</artifactId>
 						<version>2.6</version>
 					</dependency>
+					<dependency>
+						<groupId>org.apache.maven.doxia</groupId>
+						<artifactId>doxia-module-markdown</artifactId>
+						<version>1.5</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 			<plugin>

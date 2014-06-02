@@ -22,9 +22,6 @@ import com.vaadin.ui.Component;
 
 public interface VaadinFormInstance extends FormInstance<Component> {
 
-	@Override
-	public Component getImplementation();
-
 	public AbstractComponent getComponentById(String id);
 
 }

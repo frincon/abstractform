@@ -1,3 +1,6 @@
+Download
+========
+
 All downloads include the binaries, the source code, and the javadocs.
 
 0.1.0
@@ -17,12 +20,12 @@ For Maven:
                 </dependency>
                 <dependency>
                         <groupId>org.abstractform</groupId>
-                        <artifactId>org.abstractform.vaadin</artifactId>
+                        <artifactId>org.abstractform.core.fluent</artifactId>
                         <version>0.1.0</version>
                 </dependency>
                 <dependency>
                         <groupId>org.abstractform</groupId>
-                        <artifactId>org.abstractform.binding.vaadin</artifactId>
+                        <artifactId>org.abstractform.vaadin</artifactId>
                         <version>0.1.0</version>
                 </dependency>
                 <dependency>
@@ -32,12 +35,17 @@ For Maven:
                 </dependency>
                 <dependency>
                         <groupId>org.abstractform</groupId>
-                        <artifactId>org.abstractform.binding.eclipse</artifactId>
+                        <artifactId>org.abstractform.binding.fluent</artifactId>
                         <version>0.1.0</version>
                 </dependency>
                 <dependency>
                         <groupId>org.abstractform</groupId>
-                        <artifactId>org.abstractform.test.common</artifactId>
+                        <artifactId>org.abstractform.binding.vaadin</artifactId>
+                        <version>0.1.0</version>
+                </dependency>
+                <dependency>
+                        <groupId>org.abstractform</groupId>
+                        <artifactId>org.abstractform.binding.eclipse</artifactId>
                         <version>0.1.0</version>
                 </dependency>
 

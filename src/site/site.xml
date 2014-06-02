@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<project name="Maven" xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project name="AbstractForm" xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
 	<bannerLeft>
 		<name>Maven</name>
@@ -14,6 +14,11 @@
  	-->
 
 	<body>
+		<head>
+			<meta name="Keywords" content="AbstractForm, Form Generator, Form Engine, Form, Java, java, free, open source, Vaadin, GUI, GUI Engine, Graphical Interface, Binding, Validation" />
+			<meta name="Description"
+				content="AbstractForm is a framework to build graphical forms for different GUI APIs for Java. With AbstractForm you can define a form in different ways and render it to different GUI APIs." />
+		</head>
 		<!-- 
 		<links>
 			<item name="Apache" href="http://www.apache.org/" />
