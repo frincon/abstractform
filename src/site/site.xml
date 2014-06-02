@@ -17,7 +17,7 @@
 		<head>
 			<meta name="Keywords" content="AbstractForm, Form Generator, Form Engine, Form, Java, java, free, open source, Vaadin, GUI, GUI Engine, Graphical Interface, Binding, Validation" />
 			<meta name="Description"
-				content="AbstractForm is a framework to build graphical forms for different GUI APIs for Java. With AbstractForm you can define a form in different ways and render it to different GUI APIs." />
+				content="AbstractForm is a framework to build graphical forms for different GUI APIs for Java. With AbstractForm you can define a form using different ways and render it to different GUI APIs." />
 		</head>
 		<!-- 
 		<links>
@@ -30,6 +30,7 @@
 			<item name="Overview" href="index.html" />
 			<item name="News" href="news.html" />
 			<item name="FAQ" href="faq.html" />
+			<item name="Screenshots" href="screenshots.html" />
 			<item name="Download" href="download.html" />
 		</menu>
 		<menu name="Documentation">
