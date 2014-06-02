@@ -6,7 +6,7 @@ Latest News
 
 ### 2 Jun 2014: AbstractForm version 0.1.1 was released
 
-Some bug fixed and solve dependency problem when using Maven.
+Some bug fixed and solved dependency problem when using Maven.
 
 Welcome to AbstractForm
 ---------------------
