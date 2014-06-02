@@ -92,5 +92,44 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.eclipse.core.databinding</artifactId>
+			<version>1.4.1.v20120521-2329</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.eclipse.core.databinding.beans</artifactId>
+			<version>1.2.200.v20120523-1955</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.eclipse.core.databinding.observable</artifactId>
+			<version>1.4.1.v20120521-2329</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.eclipse.core.databinding.property</artifactId>
+			<version>1.4.100.v20120523-1955</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.eclipse.equinox.common</artifactId>
+			<version>3.6.100.v20120522-1841</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>org.eclipse.osgi</artifactId>
+			<version>3.8.0.v20120529-1548</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
 </project>
