@@ -85,11 +85,5 @@
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.uispec4j</groupId>
-			<artifactId>uispec4j</artifactId>
-			<version>2.4</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 </project>
