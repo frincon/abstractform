@@ -16,7 +16,7 @@
       <question>Wich API can I render a Form to?</question>
       <answer>
         <p>
-        	Actually, there is one implementation to render the forms to Vaadin Component. 
+        	Actually, there are two modules: one for render to Vaadin and another to render to swing.
         </p>
       </answer>
     </faq>

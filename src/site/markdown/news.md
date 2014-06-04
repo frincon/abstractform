@@ -4,6 +4,11 @@ News
 Latest News
 -----------
 
+### 4 Jun 2014: AbstractForm version 0.2.0 was released
+
+New Swing implementation. You can now use AbstractForm to build swing forms.
+Some bugs fixed.
+
 ### 2 Jun 2014: AbstractForm version 0.1.1 was released
 
 Some bug fixed and solved dependency problem when using Maven.

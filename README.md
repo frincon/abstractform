@@ -8,6 +8,6 @@ This api amis to be an abstract framework to generate forms for diferent GUI fra
 
 The goal of this api is to create an *abstract* definition of a Form, with field type, description, validations, etc., and with this definition, the framework has the ability to construct this form to defferent Graphical frameworks.
 
-At this moment, the framework only has Vaadin plugin to generate form for vaadin.
+At this moment, the framework has Vaadin plugin and Swing plugin.
 
-For details pleas visit [AbstractForm.org](http://abstractform.org)
+For details please visit [AbstractForm.org](http://abstractform.org)
