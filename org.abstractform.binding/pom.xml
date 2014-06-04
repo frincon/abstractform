@@ -36,7 +36,6 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-RequiredExecutionEnvironment>JavaSE-1.6</Bundle-RequiredExecutionEnvironment>
 						<Import-Package>!net.sourceforge.cobertura.*,!org.osgi.service.blueprint,*</Import-Package>
-						<Bundle-Activator>org.abstractform.binding.internal.osgi.Activator</Bundle-Activator>
 					</instructions>
 				</configuration>
 			</plugin>
