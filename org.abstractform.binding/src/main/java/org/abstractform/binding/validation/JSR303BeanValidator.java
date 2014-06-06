@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.abstractform.binding.internal.validation;
+package org.abstractform.binding.validation;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-
-import org.abstractform.binding.validation.Validator;
 
 public class JSR303BeanValidator implements Validator<Object> {
 

@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.abstractform.binding.internal.validation;
+package org.abstractform.binding.validation;
 
 import javax.validation.Validation;
 import javax.validation.metadata.BeanDescriptor;
 import javax.validation.metadata.PropertyDescriptor;
-
-import org.abstractform.binding.validation.Validator;
 
 public class BeanValidationProvider {
 

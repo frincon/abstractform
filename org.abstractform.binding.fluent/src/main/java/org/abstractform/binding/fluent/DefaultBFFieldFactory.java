@@ -22,7 +22,7 @@ import java.util.Map;
 import org.abstractform.binding.fluent.selector.BFSelector;
 import org.abstractform.binding.fluent.table.BFTable;
 import org.abstractform.binding.fluent.table.BFTableField;
-import org.abstractform.binding.internal.validation.BeanValidationProvider;
+import org.abstractform.binding.validation.BeanValidationProvider;
 import org.abstractform.binding.validation.Validator;
 
 public class DefaultBFFieldFactory implements BFFieldFactory {
